@@ -41,6 +41,8 @@ function gotData(data) {
         },
         "start_date": {
           "year": deathdateB[3]
+          "month": "8"
+          "day": "11"
         },
         "text": {
           "headline": input.value(),
