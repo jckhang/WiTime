@@ -24,12 +24,11 @@ function gotData(data) {
     if (birthdeath.indexOf("|df=yes|") > 0) {
       var deathdateA = (birthdeath.split("{{Death date and age|df=yes|")[1].split("}}")[0].split("|"));
       createP(input.value() + ":" + deathdateA[3] + "-" + deathdateA[0]);
-      var item = [
-      	{Name: input.value()},
-      	{Birth_Death: deathdateA[3] + "-" + deathdateA[0]}
-      ];
-      var row = $j.tr({ child:[$j.td(item.Name), $j.td(item.Birth_)] });
-    	nameTable.appendChild(row.dom());
+      var timeline_json = make_the_json(); // you write this part
+      // two arguments: the id of the Timeline container (no '#')
+      // and the JSON object or an instance of TL.TimelineConfig created from
+      // a suitable JSON object
+      window.timeline = new TL.Timeline('timeline-embed', timeline_json);
 
     }
     if ((birthdeath.indexOf("df=y}}") > 0) || (birthdeath.indexOf("mf=y") > 0)) {
