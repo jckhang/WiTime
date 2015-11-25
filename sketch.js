@@ -1,9 +1,11 @@
 var input;
+var output;
 
 function setup() {
   noCanvas();
 
   input = select('#search');
+  output = select('#date');
   var button = select('#submit');
   button.mousePressed(search);
 }
@@ -22,6 +24,12 @@ function gotData(data) {
     if (birthdeath.indexOf("|df=yes|") > 0) {
       var deathdateA = (birthdeath.split("{{Death date and age|df=yes|")[1].split("}}")[0].split("|"));
       createP(input.value() + ":" + deathdateA[3] + "-" + deathdateA[0]);
+      var item = [
+      	{Name: input.value()},
+      	{Birth_Death: deathdateA[3] + "-" + deathdateA[0]}
+      ];
+      var row = $j.tr({ child:[$j.td(item.Name), $j.td(item.Birth_)] });
+    	nameTable.appendChild(row.dom());
 
     }
     if ((birthdeath.indexOf("df=y}}") > 0) || (birthdeath.indexOf("mf=y") > 0)) {
@@ -32,32 +40,3 @@ function gotData(data) {
 
   }
 }
-
-// if (keywordA.indexOf("|df=yes|") > 0) {
-//   var deathdateA = (birthdeath.split("{{Death date and age|df=yes|")[1].split("}}")[0].split("|"));
-//   createP(input.value() + ":" + deathdateA[3] + "-" + deathdateA[0]);
-
-// }
-
-// function draw(){
-//   fill(0);
-//   rect(10,10,50,50);
-
-// }
-
-//   for (key in data.query.pages) {
-//     var birthdeath = (data.query.pages[key].revisions[0]["*"].split("Death date and age|df=yes|")[1].split("}}")[0].split("|"));
-//     println(input.value() + ":" + birthdeath[3] + "-" + birthdeath[0]);
-//     createP(input.value() + ":" + birthdeath[3] + "-" + birthdeath[0]);
-
-
-//   }
-// }
-
-
-
-// println(data.query.pages[key].revisions[0]["*"].split("Death date and age|df=yes|")[1].split("}}")[0].split("|"));
-//   createP(input.value()
-//   + ":"
-//   + data.query.pages[key].revisions[0]["*"].split("Death date and age|df=yes|")[1].split("}}")[0].split("|")[3])
-//   ;
