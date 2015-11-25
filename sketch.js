@@ -24,16 +24,6 @@ function gotData(data) {
     if (birthdeath.indexOf("|df=yes|") > 0) {
       var deathdateA = (birthdeath.split("{{Death date and age|df=yes|")[1].split("}}")[0].split("|"));
       createP(input.value() + ":" + deathdateA[3] + "-" + deathdateA[0]);
-      var timeline_json = make_the_json(
-          "events": key birth
-          "start_date": {
-            "year": "1978"
-          }
-      ); // you write this part
-      // two arguments: the id of the Timeline container (no '#')
-      // and the JSON object or an instance of TL.TimelineConfig created from
-      // a suitable JSON object
-      window.timeline = new TL.Timeline('timeline-embed', timeline_json);
 
     }
     if ((birthdeath.indexOf("df=y}}") > 0) || (birthdeath.indexOf("mf=y") > 0)) {
@@ -41,6 +31,16 @@ function gotData(data) {
       createP(input.value() + ":" + deathdateB[3] + "-" + deathdateB[0]);
 
     }
+    var timeline_json = make_the_json(
+        "events": input.value()
+        "start_date": {
+          "year": deathdateA[3]
+        }
+    ); // you write this part
+    // two arguments: the id of the Timeline container (no '#')
+    // and the JSON object or an instance of TL.TimelineConfig created from
+    // a suitable JSON object
+    window.timeline = new TL.Timeline('timeline-embed', timeline_json);
 
   }
 }
