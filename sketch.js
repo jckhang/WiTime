@@ -31,12 +31,22 @@ function gotData(data) {
       createP(input.value() + ":" + deathdateB[3] + "-" + deathdateB[0]);
 
     }
-    var timeline_json = make_the_json(
-        "events": input.value()
+    var timeline_json = {
+        "media": {
+          "url": "",
+          "caption": "",
+          "credit": ""
+        },
         "start_date": {
-          "year": deathdateA[3]
+          "year": deathdateB[3]
+        },
+        "text": {
+          "headline": input.value(),
+          "text": input.value(),
         }
-    ); // you write this part
+      },
+
+     // you write this part
     // two arguments: the id of the Timeline container (no '#')
     // and the JSON object or an instance of TL.TimelineConfig created from
     // a suitable JSON object
