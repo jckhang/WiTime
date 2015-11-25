@@ -8,6 +8,8 @@ function setup() {
   output = select('#date');
   var button = select('#submit');
   button.mousePressed(search);
+  timeline = new TL.Timeline('timeline-embed',
+      'https://docs.google.com/spreadsheets/d/14mfh_3JhEhWZVWCmw1VfXCvuNAEycUrGQUrcMwI8LNY/pubhtml');
 }
 
 function search() {
@@ -31,6 +33,6 @@ function gotData(data) {
       createP(input.value() + ":" + deathdateB[3] + "-" + deathdateB[0]);
 
     }
-    
+
   }
 }
