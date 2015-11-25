@@ -24,7 +24,12 @@ function gotData(data) {
     if (birthdeath.indexOf("|df=yes|") > 0) {
       var deathdateA = (birthdeath.split("{{Death date and age|df=yes|")[1].split("}}")[0].split("|"));
       createP(input.value() + ":" + deathdateA[3] + "-" + deathdateA[0]);
-      var timeline_json = make_the_json(); // you write this part
+      var timeline_json = make_the_json(
+          "events": key birth
+          "start_date": {
+            "year": "1978"
+          }
+      ); // you write this part
       // two arguments: the id of the Timeline container (no '#')
       // and the JSON object or an instance of TL.TimelineConfig created from
       // a suitable JSON object
