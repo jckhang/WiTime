@@ -33,4 +33,4 @@ function gotData(data) {
       createP(input.value() + ":" + deathdateB[3] + "-" + deathdateB[0]);
 
     }
-}
+  }
