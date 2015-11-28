@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- saved from url=(0049)http://yuxiangzhang.me/wikifilter/insert-new.html -->
+
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -22,9 +22,6 @@
 			</p>
 			<p><label for="Headline">Headline:</label>
 				<input id="Headline" name="Headline" type="text" value="Marcel Duchamp Birth">
-			</p>
-
-			<p id="result"><a href="https://docs.google.com/spreadsheets/d/14mfh_3JhEhWZVWCmw1VfXCvuNAEycUrGQUrcMwI8LNY/pubhtml" target="_blank">Success - see Google Sheet</a>
 			</p>
 			<input type="submit" value="Send">
 		</form>
@@ -53,7 +50,10 @@
 
 					// fire off the request to /form.php
 					request = $.ajax({
-						url: "https://script.google.com/macros/s/AKfycby2WvqsyQa4zO5nQeKzL7QO36S9Ed8BWcFrNBCIL9rfeK7yQ1D_/exec",
+						// timeline
+						//url: "https://script.google.com/macros/s/AKfycby2WvqsyQa4zO5nQeKzL7QO36S9Ed8BWcFrNBCIL9rfeK7yQ1D_/exec",
+						// test
+						url: "https://script.google.com/macros/s/AKfycbzV--xTooSkBLufMs4AnrCTdwZxVNtycTE4JNtaCze2UijXAg8/exec",
 						type: "post",
 						data: serializedData
 					});
@@ -61,7 +61,11 @@
 					// callback handler that will be called on success
 					request.done(function (response, textStatus, jqXHR){
 						// log a message to the console
-						$('#result').html('<a href="https://docs.google.com/spreadsheets/d/14mfh_3JhEhWZVWCmw1VfXCvuNAEycUrGQUrcMwI8LNY/pubhtml" target="_blank">Success - see Google Sheet</a>');
+						// timeline
+						// $('#result').html('<a href="https://docs.google.com/spreadsheets/d/14mfh_3JhEhWZVWCmw1VfXCvuNAEycUrGQUrcMwI8LNY/pubhtml" target="_blank">Success - see Google Sheet</a>');
+						// test
+						$('#result').html('<a href="https://docs.google.com/spreadsheets/d/10tt64TiALYhPMqR2fh9JzkuhxW7oC0rXXPb_pmJ7HAY/edit?usp=sharing" target="_blank">Success - see Google Sheet</a>');
+
 						console.log("Hooray, it worked!");
 					});
 
