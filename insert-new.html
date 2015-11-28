@@ -1,24 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- saved from url=(0051)https://mashe.hawksey.info/examlpes/insert-new.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <script type="text/javascript">
 //<![CDATA[
 try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dok3v=1613a3a185/"},atok:"7e5569d16072e3c51ca01932ebbb5806",petok:"a9d31e8512673768bf1246974a107ce8e449bed6-1448741590-1800",zone:"hawksey.info",rocket:"a",apps:{},sha2test:0}];document.write('<script type="text/javascript" src="//ajax.cloudflare.com/cdn-cgi/nexp/dok3v=38857570ac/cloudflare.min.js"><'+'\/script>');}}catch(e){};
 //]]>
-</script><script type="text/javascript" src="./insert-new_files/cloudflare.min.js"></script><style type="text/css">.cf-hidden { display: none; } .cf-invisible { visibility: hidden; }</style><script data-module="cloudflare/rocket" id="cfjs_block_8839f3f990" onload="CloudFlare.__cfjs_block_8839f3f990_load()" onerror="CloudFlare.__cfjs_block_8839f3f990_error()" onreadystatechange="CloudFlare.__cfjs_block_8839f3f990_readystatechange()" type="text/javascript" src="./insert-new_files/rocket.js"></script>
-<script data-cfasync="false" src="./insert-new_files/jquery.min.js"></script>
+</script>
+<script data-cfasync="false" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <title>Untitled Document</title>
-<link href="./insert-new_files/style.css" rel="stylesheet" type="text/css">
+<link href="https://mcdn.hawksey.info/wp-content/themes/tiny-forge/style.css?ver=1.4.1.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <form id="foo">
 <p><label for="name">Name:</label>
-<input id="name" name="name" type="text" value=""></p>
-<p><label for="comment">Comment:</label><br>
+<input id="name" name="name" type="text" value=""/></p>
+<p><label for="comment">Comment:</label><br/>
 <textarea id="comment" name="comment" cols="40"></textarea></p>
 <p id="result"></p>
-<input type="submit" value="Send">
+<input type="submit" value="Send"/>
 </form>
 <script data-cfasync="false" type="text/javascript">
 jQuery( document ).ready(function( $ ) {
@@ -45,7 +47,7 @@ jQuery( document ).ready(function( $ ) {
 
 		// fire off the request to /form.php
 		request = $.ajax({
-			url: "https://script.google.com/macros/s/AKfycbwpFOP9rDvblAeeLLVl4Jg25202WscqVgVSxbKbIp8TVECWu9mo/exec",
+			url: "https://script.google.com/macros/s/AKfycbzV--xTooSkBLufMs4AnrCTdwZxVNtycTE4JNtaCze2UijXAg8/exec",
 			type: "post",
 			data: serializedData
 		});
@@ -53,7 +55,7 @@ jQuery( document ).ready(function( $ ) {
 		// callback handler that will be called on success
 		request.done(function (response, textStatus, jqXHR){
 			// log a message to the console
-			$('#result').html('<a href="https://docs.google.com/spreadsheets/d/1eu_RwdgqkOc2gAD1pmo4cJK7EkxwyNrpO4I3E57ibVk/pubhtml" target="_blank">Success - see Google Sheet</a>');
+			$('#result').html('<a href="https://docs.google.com/spreadsheets/d/10tt64TiALYhPMqR2fh9JzkuhxW7oC0rXXPb_pmJ7HAY/edit?usp=sharing" target="_blank">Success - see Google Sheet</a>');
 			console.log("Hooray, it worked!");
 		});
 
@@ -78,6 +80,5 @@ jQuery( document ).ready(function( $ ) {
 	});
 });
 </script>
-
-
-</body><div></div><div></div></html>
+</body>
+</html>
