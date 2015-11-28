@@ -8,8 +8,6 @@ function setup() {
   output = select('#date');
   var button = select('#submit');
   button.mousePressed(search);
-  timeline = new TL.Timeline('timeline-embed',
-      'https://docs.google.com/spreadsheets/d/14mfh_3JhEhWZVWCmw1VfXCvuNAEycUrGQUrcMwI8LNY/pubhtml');
 }
 
 function search() {
