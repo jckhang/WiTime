@@ -3,6 +3,12 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<script type="text/javascript">
+			//<![CDATA[
+			try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dok3v=1613a3a185/"},atok:"7e5569d16072e3c51ca01932ebbb5806",petok:"a9d31e8512673768bf1246974a107ce8e449bed6-1448741590-1800",zone:"hawksey.info",rocket:"a",apps:{},sha2test:0}];document.write('<script type="text/javascript" src="//ajax.cloudflare.com/cdn-cgi/nexp/dok3v=38857570ac/cloudflare.min.js"><'+'\/script>');}}catch(e){};
+			//]]>
+		</script>
+		<script data-cfasync="false" src="./insert-new_files/jquery.min.js"></script>
 		<title>Untitled Document</title>
 		<link href="./insert-new_files/style.css" rel="stylesheet" type="text/css">
 	</head>
@@ -20,9 +26,8 @@
 			<p id="result"></p>
 			<input type="submit" value="Send">
 		</form>
-
 		<script data-cfasync="false" type="text/javascript">
-
+			jQuery( document ).ready(function( $ ) {
 				// variable to hold request
 				var request;
 				// bind to the submit event of our form
@@ -46,7 +51,7 @@
 
 					// fire off the request to /form.php
 					request = $.ajax({
-						url: "https://https://script.google.com/macros/s/AKfycbwpFOP9rDvblAeeLLVl4Jg25202WscqVgVSxbKbIp8TVECWu9mo/exec",
+						url: "https://script.google.com/macros/s/AKfycby2WvqsyQa4zO5nQeKzL7QO36S9Ed8BWcFrNBCIL9rfeK7yQ1D_/exec",
 						type: "post",
 						data: serializedData
 					});
@@ -54,7 +59,7 @@
 					// callback handler that will be called on success
 					request.done(function (response, textStatus, jqXHR){
 						// log a message to the console
-						$('#result').html('<a href="https://docs.google.com/spreadsheets/d/1eu_RwdgqkOc2gAD1pmo4cJK7EkxwyNrpO4I3E57ibVk/pubhtml" target="_blank">Success - see Google Sheet</a>');
+						$('#result').html('<a href="https://docs.google.com/spreadsheets/d/14mfh_3JhEhWZVWCmw1VfXCvuNAEycUrGQUrcMwI8LNY/pubhtml" target="_blank">Success - see Google Sheet</a>');
 						console.log("Hooray, it worked!");
 					});
 
@@ -77,6 +82,7 @@
 					// prevent default posting of form
 					event.preventDefault();
 				});
+			});
 		</script>
 	</body>
 </html>
