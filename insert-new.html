@@ -46,7 +46,7 @@
 
 					// fire off the request to /form.php
 					request = $.ajax({
-						url: "https://script.google.com/macros/s/AKfycby2WvqsyQa4zO5nQeKzL7QO36S9Ed8BWcFrNBCIL9rfeK7yQ1D_/exec",
+						url: "https://script.google.com/macros/s/AKfycbwpFOP9rDvblAeeLLVl4Jg25202WscqVgVSxbKbIp8TVECWu9mo/exec",
 						type: "post",
 						data: serializedData
 					});
@@ -54,7 +54,7 @@
 					// callback handler that will be called on success
 					request.done(function (response, textStatus, jqXHR){
 						// log a message to the console
-						$('#result').html('<a href="https://docs.google.com/spreadsheets/d/14mfh_3JhEhWZVWCmw1VfXCvuNAEycUrGQUrcMwI8LNY/pubhtml" target="_blank">Success - see Google Sheet</a>');
+						$('#result').html('<a href="https://docs.google.com/spreadsheets/d/1eu_RwdgqkOc2gAD1pmo4cJK7EkxwyNrpO4I3E57ibVk/edit#gid=0&vpid=A1" target="_blank">Success - see Google Sheet</a>');
 						console.log("Hooray, it worked!");
 					});
 
