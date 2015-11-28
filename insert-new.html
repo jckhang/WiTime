@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0051)https://mashe.hawksey.info/examlpes/insert-new.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dok3v=1613a3a185/"},atok:"7e5569d16072e3c51ca01932ebbb5806",petok:"a9d31e8512673768bf1246974a107ce8e449bed6-1448741590-1800",zone:"hawksey.info",rocket:"a",apps:{},sha2test:0}];document.write('<script type="text/javascript" src="//ajax.cloudflare.com/cdn-cgi/nexp/dok3v=38857570ac/cloudflare.min.js"><'+'\/script>');}}catch(e){};
+//]]>
+</script><script type="text/javascript" src="./insert-new_files/cloudflare.min.js"></script><style type="text/css">.cf-hidden { display: none; } .cf-invisible { visibility: hidden; }</style><script data-module="cloudflare/rocket" id="cfjs_block_8839f3f990" onload="CloudFlare.__cfjs_block_8839f3f990_load()" onerror="CloudFlare.__cfjs_block_8839f3f990_error()" onreadystatechange="CloudFlare.__cfjs_block_8839f3f990_readystatechange()" type="text/javascript" src="./insert-new_files/rocket.js"></script>
+<script data-cfasync="false" src="./insert-new_files/jquery.min.js"></script>
+<title>Untitled Document</title>
+<link href="./insert-new_files/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<form id="foo">
+<p><label for="name">Name:</label>
+<input id="name" name="name" type="text" value=""></p>
+<p><label for="comment">Comment:</label><br>
+<textarea id="comment" name="comment" cols="40"></textarea></p>
+<p id="result"></p>
+<input type="submit" value="Send">
+</form>
+<script data-cfasync="false" type="text/javascript">
+jQuery( document ).ready(function( $ ) {
+	// variable to hold request
+	var request;
+	// bind to the submit event of our form
+	$("#foo").submit(function(event){
+		// abort any pending request
+		if (request) {
+			request.abort();
+		}
+		// setup some local variables
+		var $form = $(this);
+		// let's select and cache all the fields
+		var $inputs = $form.find("input, select, button, textarea");
+		// serialize the data in the form
+		var serializedData = $form.serialize();
+	
+		// let's disable the inputs for the duration of the ajax request
+		// Note: we disable elements AFTER the form data has been serialized.
+		// Disabled form elements will not be serialized.
+		$inputs.prop("disabled", true);
+		$('#result').text('Sending data...');
+	
+		// fire off the request to /form.php
+		request = $.ajax({
+			url: "https://script.google.com/macros/s/AKfycbzV--xTooSkBLufMs4AnrCTdwZxVNtycTE4JNtaCze2UijXAg8/exec",
+			type: "post",
+			data: serializedData
+		});
+	
+		// callback handler that will be called on success
+		request.done(function (response, textStatus, jqXHR){
+			// log a message to the console
+			$('#result').html('<a href="https://docs.google.com/spreadsheets/d/10tt64TiALYhPMqR2fh9JzkuhxW7oC0rXXPb_pmJ7HAY/edit?usp=sharing" target="_blank">Success - see Google Sheet</a>');
+			console.log("Hooray, it worked!");
+		});
+	
+		// callback handler that will be called on failure
+		request.fail(function (jqXHR, textStatus, errorThrown){
+			// log the error to the console
+			console.error(
+				"The following error occured: "+
+				textStatus, errorThrown
+			);
+		});
+	
+		// callback handler that will be called regardless
+		// if the request failed or succeeded
+		request.always(function () {
+			// reenable the inputs
+			$inputs.prop("disabled", false);
+		});
+	
+		// prevent default posting of form
+		event.preventDefault();
+	});
+});
+</script>
+
+
+</body><div></div><div></div></html>
