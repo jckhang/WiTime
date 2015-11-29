@@ -58,7 +58,6 @@
          <input id="Media Credit" name="Media Credit" type="hidden" value="">
          <input id="Media Caption" name="Media Caption" type="hidden" value="">
          <input id="Media Thumbnail" name="Media Thumbnail" type="hidden" value="">
-
          <p id="result"></p>
          <input type="submit" value="Send">
        </form>
@@ -89,6 +88,7 @@
    					request = $.ajax({
    						url: "https://script.google.com/macros/s/AKfycby2WvqsyQa4zO5nQeKzL7QO36S9Ed8BWcFrNBCIL9rfeK7yQ1D_/exec",
    						type: "post",
+              useDefaultXhrHeader: false,
    						data: serializedData
    					});
 
