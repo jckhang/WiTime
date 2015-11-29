@@ -20,7 +20,8 @@
          timeline = new TL.Timeline('timeline-embed',
              'https://docs.google.com/spreadsheets/d/14mfh_3JhEhWZVWCmw1VfXCvuNAEycUrGQUrcMwI8LNY/edit#gid=0&vpid=A1');
    </script>
-
+	<script data-cfasync="false" src="./insert-new_files/jquery.min.js"></script>
+  
   <body>
 
     <div class="container">
@@ -39,7 +40,81 @@
         </h3>
       </div>
        -->
-<iframe style="width: 80%; height: 300px;" src="http://yuxiangzhang.me/wikifilter/insert-new.html" width="300" height="150" scrolling="no"></iframe>
-    </div>
+       <form id="foo">
+         <p><label for="StartDate">StartDate:</label>
+           <input id="Start Date" name="Start Date" type="text" value="6/28/1887">
+         </p>
+         <input id="End Date" name="End Date" type="hidden" value="">
+         <p><label for="Headline">Headline:</label>
+           <input id="Headline" name="Headline" type="text" value="Marcel Duchamp Birth">
+         </p>
+         <input id="Text" name="Text" type="hidden" value="">
+         <input id="Media" name="Media" type="hidden" value="">
+         <input id="Media Credit" name="Media Credit" type="hidden" value="">
+         <input id="Media Caption" name="Media Caption" type="hidden" value="">
+         <input id="Media Thumbnail" name="Media Thumbnail" type="hidden" value="">
+
+         <p id="result"></p>
+         <input type="submit" value="Send">
+       </form>
+       <script data-cfasync="false" type="text/javascript">
+   			jQuery( document ).ready(function( $ ) {
+   				// variable to hold request
+   				var request;
+   				// bind to the submit event of our form
+   				$("#foo").submit(function(event){
+   					// abort any pending request
+   					if (request) {
+   						request.abort();
+   					}
+   					// setup some local variables
+   					var $form = $(this);
+   					// let's select and cache all the fields
+   					var $inputs = $form.find("input, select, button, textarea");
+   					// serialize the data in the form
+   					var serializedData = $form.serialize();
+
+   					// let's disable the inputs for the duration of the ajax request
+   					// Note: we disable elements AFTER the form data has been serialized.
+   					// Disabled form elements will not be serialized.
+   					$inputs.prop("disabled", true);
+   					$('#result').text('Sending data...');
+
+   					// fire off the request to /form.php
+   					request = $.ajax({
+   						url: "https://script.google.com/macros/s/AKfycby2WvqsyQa4zO5nQeKzL7QO36S9Ed8BWcFrNBCIL9rfeK7yQ1D_/exec",
+   						type: "post",
+   						data: serializedData
+   					});
+
+   					// callback handler that will be called on success
+   					request.done(function (response, textStatus, jqXHR){
+   						// log a message to the console
+   						$('#result').html('<a href="https://docs.google.com/spreadsheets/d/14mfh_3JhEhWZVWCmw1VfXCvuNAEycUrGQUrcMwI8LNY/pubhtml target="_blank">Success - see Google Sheet</a>');
+   						console.log("Hooray, it worked!");
+   					});
+
+   					// callback handler that will be called on failure
+   					request.fail(function (jqXHR, textStatus, errorThrown){
+   						// log the error to the console
+   						console.error(
+   							"The following error occured: "+
+   							textStatus, errorThrown
+   						);
+   					});
+
+   					// callback handler that will be called regardless
+   					// if the request failed or succeeded
+   					request.always(function () {
+   						// reenable the inputs
+   						$inputs.prop("disabled", false);
+   					});
+
+   					// prevent default posting of form
+   					event.preventDefault();
+   				});
+   			});
+   		</script>
+     </div>
   </body>
 </html>
