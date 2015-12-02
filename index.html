@@ -58,7 +58,7 @@
 
           function search() {
             var term = input.value();
-            var url = 'https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&rvsection=0&format=json' + '&titles=' + term;
+              var url = 'https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&rvsection=0&format=json' + '&titles=' + term;
             loadJSON(url, gotData, 'jsonp');
           }
 
