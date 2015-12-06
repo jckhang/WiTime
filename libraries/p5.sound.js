@@ -1,4 +1,4 @@
-/*! p5.sound.js v0.2.13 2015-07-17 */
+/*! p5.sound.js v0.2.14 2015-09-21 */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd)
     define('p5.sound', ['p5'], function (p5) { (factory(p5));});
@@ -36,15 +36,15 @@
  *  <b><a href="#/p5.Convolver">p5.Convolver</a>:</b> Extends
  *  <a href="#/p5.Reverb">p5.Reverb</a> to simulate the sound of real
  *    physical spaces through convolution.<br/>
- *  <b><a href="#/p5.SoundRecorder">p5.SoundRecorder</a></b>: Record sound for playback 
+ *  <b><a href="#/p5.SoundRecorder">p5.SoundRecorder</a></b>: Record sound for playback
  *    / save the .wav file.
  *  <b><a href="#/p5.Phrase">p5.Phrase</a></b>, <b><a href="#/p5.Part">p5.Part</a></b> and
  *  <b><a href="#/p5.Score">p5.Score</a></b>: Compose musical sequences.
  *  <br/><br/>
  *  p5.sound is on <a href="https://github.com/therewasaguy/p5.sound/">GitHub</a>.
- *  Download the latest version 
+ *  Download the latest version
  *  <a href="https://github.com/therewasaguy/p5.sound/blob/master/lib/p5.sound.js">here</a>.
- *  
+ *
  *  @module p5.sound
  *  @submodule p5.sound
  *  @for p5.sound
@@ -52,7 +52,7 @@
  */
 /**
  *  p5.sound developed by Jason Sigal for the Processing Foundation, Google Summer of Code 2014. The MIT License (MIT).
- *  
+ *
  *  http://github.com/therewasaguy/p5.sound
  *
  *  Some of the many audio libraries & resources that inspire p5.sound:
@@ -62,7 +62,7 @@
  *   - wavesurfer.js https://github.com/katspaugh/wavesurfer.js
  *   - Web Audio Components by Jordan Santell https://github.com/web-audio-components
  *   - Wilm Thoben's Sound library for Processing https://github.com/processing/processing/tree/master/java/libraries/sound
- *   
+ *
  *   Web Audio API: http://w3.org/TR/webaudio/
  */
 var sndcore;
@@ -154,7 +154,7 @@ sndcore = function () {
   // http://paulbakaus.com/tutorials/html5/web-audio-on-ios/
   var iOS = navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false;
   if (iOS) {
-    window.addEventListener('touchstart', function () {
+    window.addEventListener('touchend', function () {
       // create empty buffer
       var buffer = audiocontext.createBuffer(1, 1, 22050);
       var source = audiocontext.createBufferSource();
@@ -205,9 +205,9 @@ master = function () {
   // create a single instance of the p5Sound / master output for use within this sketch
   var p5sound = new Master();
   /**
-   * Returns a number representing the master amplitude (volume) for sound 
+   * Returns a number representing the master amplitude (volume) for sound
    * in this sketch.
-   * 
+   *
    * @method getMasterVolume
    * @return {Number} Master amplitude (volume) for sound in this sketch.
    *                  Should be between 0.0 (silence) and 1.0.
@@ -259,10 +259,10 @@ master = function () {
   };
   /**
    *  p5.soundOut is the p5.sound master output. It sends output to
-   *  the destination of this window's web audio context. It contains 
+   *  the destination of this window's web audio context. It contains
    *  Web Audio API nodes including a dyanmicsCompressor (<code>.limiter</code>),
    *  and Gain Nodes for <code>.input</code> and <code>.output</code>.
-   *  
+   *
    *  @property p5.soundOut
    *  @type {Object}
    */
@@ -271,7 +271,7 @@ master = function () {
    *  a silent connection to the DesinationNode
    *  which will ensure that anything connected to it
    *  will not be garbage collected
-   *  
+   *
    *  @private
    */
   p5.soundOut._silentNode = p5sound.audiocontext.createGain();
@@ -299,7 +299,7 @@ helpers = function () {
   /**
    *  Returns the closest MIDI note value for
    *  a given frequency.
-   *  
+   *
    *  @param  {Number} frequency A freqeuncy, for example, the "A"
    *                             above Middle C is 440Hz
    *  @return {Number}   MIDI note value
@@ -314,7 +314,7 @@ helpers = function () {
    *  General MIDI treats notes as integers where middle C
    *  is 60, C# is 61, D is 62 etc. Useful for generating
    *  musical frequencies with oscillators.
-   *  
+   *
    *  @method  midiToFreq
    *  @param  {Number} midiNote The number of a MIDI note
    *  @return {Number} Frequency value of the given MIDI note
@@ -322,13 +322,13 @@ helpers = function () {
    *  <div><code>
    *  var notes = [60, 64, 67, 72];
    *  var i = 0;
-   *  
+   *
    *  function setup() {
    *    osc = new p5.Oscillator('Triangle');
    *    osc.start();
    *    frameRate(1);
    *  }
-   *  
+   *
    *  function draw() {
    *    var freq = midiToFreq(notes[i]);
    *    osc.freq(freq);
@@ -343,12 +343,12 @@ helpers = function () {
     return 440 * Math.pow(2, (m - 69) / 12);
   };
   /**
-   *  List the SoundFile formats that you will include. LoadSound 
+   *  List the SoundFile formats that you will include. LoadSound
    *  will search your directory for these extensions, and will pick
    *  a format that is compatable with the client's web browser.
    *  <a href="http://media.io/">Here</a> is a free online file
    *  converter.
-   *  
+   *
    *  @method soundFormats
    *  @param {String|Strings} formats i.e. 'mp3', 'wav', 'ogg'
    *  @example
@@ -356,7 +356,7 @@ helpers = function () {
    *  function preload() {
    *    // set the global sound formats
    *    soundFormats('mp3', 'ogg');
-   *    
+   *
    *    // load either beatbox.mp3, or .ogg, depending on browser
    *    mySound = loadSound('../sounds/beatbox.mp3');
    *  }
@@ -582,19 +582,19 @@ soundfile = function () {
   var ac = p5sound.audiocontext;
   /**
    *  <p>SoundFile object with a path to a file.</p>
-   *  
+   *
    *  <p>The p5.SoundFile may not be available immediately because
    *  it loads the file information asynchronously.</p>
-   * 
+   *
    *  <p>To do something with the sound as soon as it loads
    *  pass the name of a function as the second parameter.</p>
-   *  
-   *  <p>Only one file path is required. However, audio file formats 
+   *
+   *  <p>Only one file path is required. However, audio file formats
    *  (i.e. mp3, ogg, wav and m4a/aac) are not supported by all
    *  web browsers. If you want to ensure compatability, instead of a single
    *  file path, you may include an Array of filepaths, and the browser will
    *  choose a format that works.</p>
-   * 
+   *
    *  @class p5.SoundFile
    *  @constructor
    *  @param {String/Array} path   path to a sound file (String). Optionally,
@@ -603,9 +603,9 @@ soundfile = function () {
    *                               from the HTML5 File API, or a p5.File.
    *  @param {Function} [callback]   Name of a function to call once file loads
    *  @return {Object}    p5.SoundFile Object
-   *  @example 
+   *  @example
    *  <div><code>
-   *  
+   *
    *  function preload() {
    *    mySound = loadSound('assets/doorbell.mp3');
    *  }
@@ -614,7 +614,7 @@ soundfile = function () {
    *    mySound.setVolume(0.1);
    *    mySound.play();
    *  }
-   * 
+   *
    * </code></div>
    */
   p5.SoundFile = function (paths, onload, whileLoading) {
@@ -624,7 +624,7 @@ soundfile = function () {
         this.url = path;
       } else if (typeof paths == 'object') {
         if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
-          // The File API isn't supported in this browser 
+          // The File API isn't supported in this browser
           throw 'Unable to load file because the File API is not supported';
         }
       }
@@ -690,7 +690,7 @@ soundfile = function () {
    *  loadSound accepts a callback as the second parameter. Using a
    *  <a href="https://github.com/processing/p5.js/wiki/Local-server">
    *  local server</a> is recommended when loading external files.
-   *  
+   *
    *  @method loadSound
    *  @param  {String/Array}   path     Path to the sound file, or an array with
    *                                    paths to soundfiles in multiple formats
@@ -702,7 +702,7 @@ soundfile = function () {
    *                                 This function will receive a percentage from 0.0
    *                                 to 1.0.
    *  @return {SoundFile}            Returns a p5.SoundFile
-   *  @example 
+   *  @example
    *  <div><code>
    *  function preload() {
    *   mySound = loadSound('assets/doorbell.mp3');
@@ -777,9 +777,9 @@ soundfile = function () {
   };
   /**
    *  Returns true if the sound file finished loading successfully.
-   *  
+   *
    *  @method  isLoaded
-   *  @return {Boolean} 
+   *  @return {Boolean}
    */
   p5.SoundFile.prototype.isLoaded = function () {
     if (this.buffer) {
@@ -838,7 +838,7 @@ soundfile = function () {
         duration = this.buffer.duration - cueStart;
       }
       // TO DO: Fix this. It broke in Safari
-      // 
+      //
       // method of controlling gain for individual bufferSourceNodes, without resetting overall soundfile volume
       // if (typeof(this.bufferSourceNode.gain === 'undefined' ) ) {
       //   this.bufferSourceNode.gain = p5sound.audiocontext.createGain();
@@ -847,7 +847,7 @@ soundfile = function () {
       // set local amp if provided, otherwise 1
       var a = amp || 1;
       // this.bufferSourceNode.gain.gain.setValueAtTime(a, p5sound.audiocontext.currentTime);
-      // this.bufferSourceNode.gain.connect(this.output); 
+      // this.bufferSourceNode.gain.connect(this.output);
       this.bufferSourceNode.connect(this.output);
       this.output.gain.value = a;
       // not necessary with _initBufferSource ?
@@ -900,8 +900,8 @@ soundfile = function () {
    *  p5.SoundFile if it is triggered while in the middle of playback.
    *  In sustain mode, playback will continue simultaneous to the
    *  new playback. In restart mode, play() will stop playback
-   *  and start over. Sustain is the default mode. 
-   *  
+   *  and start over. Sustain is the default mode.
+   *
    *  @method  playMode
    *  @param  {String} str 'restart' or 'sustain'
    *  @example
@@ -917,7 +917,7 @@ soundfile = function () {
    *    mySound.playMode('restart');
    *    mySound.play();
    *  }
-   * 
+   *
    * </code></div>
    */
   p5.SoundFile.prototype.playMode = function (str) {
@@ -951,7 +951,7 @@ soundfile = function () {
    *  @example
    *  <div><code>
    *  var soundFile;
-   *  
+   *
    *  function preload() {
    *    soundFormats('ogg', 'mp3');
    *    soundFile = loadSound('assets/Damscray_-_Dancing_Tiger_02.mp3');
@@ -967,7 +967,7 @@ soundfile = function () {
    *      background(255, 0, 0);
    *    }
    *  }
-   *  
+   *
    *  function keyReleased() {
    *    if (key == 'p') {
    *      soundFile.play();
@@ -1010,8 +1010,8 @@ soundfile = function () {
   /**
    * Set a p5.SoundFile's looping flag to true or false. If the sound
    * is currently playing, this change will take effect when it
-   * reaches the end of the current playback. 
-   * 
+   * reaches the end of the current playback.
+   *
    * @param {Boolean} Boolean   set looping to true or false
    */
   p5.SoundFile.prototype.setLoop = function (bool) {
@@ -1164,15 +1164,15 @@ soundfile = function () {
    *    soundFormats('ogg', 'mp3');
    *    soundFile = loadSound('assets/beatbox.mp3');
    *  }
-   *  
+   *
    *  function draw() {
    *    background(0);
    *    ball.x = constrain(mouseX, 0, width);
    *    ellipse(ball.x, height/2, 20, 20)
    *  }
-   *  
+   *
    *  function mousePressed(){
-   *    // map the ball's x location to a panning degree 
+   *    // map the ball's x location to a panning degree
    *    // between -1.0 (left) and 1.0 (right)
    *    var panning = map(ball.x, 0., width,-1.0, 1.0);
    *    soundFile.pan(panning);
@@ -1205,7 +1205,7 @@ soundfile = function () {
    *  @example
    *  <div><code>
    *  var song;
-   *  
+   *
    *  function preload() {
    *    song = loadSound('assets/Damscray_DancingTiger.mp3');
    *  }
@@ -1216,22 +1216,22 @@ soundfile = function () {
    *
    *  function draw() {
    *    background(200);
-   *    
+   *
    *    // Set the rate to a range between 0.1 and 4
    *    // Changing the rate also alters the pitch
    *    var speed = map(mouseY, 0.1, height, 0, 2);
    *    speed = constrain(speed, 0.01, 4);
    *    song.rate(speed);
-   *    
+   *
    *    // Draw a circle to show what is going on
    *    stroke(0);
    *    fill(51, 100);
    *    ellipse(mouseX, 100, 48, 48);
    *  }
-   *  
+   *
    * </code>
    * </div>
-   *  
+   *
    */
   p5.SoundFile.prototype.rate = function (playbackRate) {
     if (this.playbackRate === playbackRate && this.bufferSourceNode) {
@@ -1359,9 +1359,9 @@ soundfile = function () {
    * audio buffer to find the greatest amplitudes. Accepts one
    * parameter, 'length', which determines size of the array.
    * Larger arrays result in more precise waveform visualizations.
-   * 
+   *
    * Inspired by Wavesurfer.js.
-   * 
+   *
    * @method  getPeaks
    * @params {Number} [length] length is the size of the returned array.
    *                          Larger length results in more precision.
@@ -1413,7 +1413,7 @@ soundfile = function () {
    *  @example
    *  <div><code>
    *  var drum;
-   *  
+   *
    *  function preload() {
    *    drum = loadSound('assets/drum.mp3');
    *  }
@@ -1422,7 +1422,7 @@ soundfile = function () {
    *    drum.reverseBuffer();
    *    drum.play();
    *  }
-   *  
+   *
    * </code>
    * </div>
    */
@@ -1514,7 +1514,7 @@ soundfile = function () {
    *  p5.SoundFile class contains its own instance of the Amplitude
    *  class to help make it easy to get a SoundFile's volume level.
    *  Accepts an optional smoothing value (0.0 < 1.0).
-   *  
+   *
    *  @method  getLevel
    *  @param  {Number} [smoothing] Smoothing is 0.0 by default.
    *                               Smooths values based on previous values.
@@ -1541,7 +1541,7 @@ soundfile = function () {
   };
   /**
    *  Replace the current Audio Buffer with a new Buffer.
-   *  
+   *
    *  @param {Array} buf Array of Float32 Array(s). 2 Float32 Arrays
    *                     will create a stereo source. 1 will create
    *                     a mono source.
@@ -1620,7 +1620,7 @@ soundfile = function () {
    *  The process involves running the soundfile through a lowpass filter, and finding all of the
    *  peaks above the initial threshold. If the total number of peaks are below the minimum number of peaks,
    *  it decreases the threshold and re-runs the analysis until either minPeaks or minThreshold are reached.
-   *  
+   *
    *  @method  processPeaks
    *  @param  {Function} callback       a function to call once this data is returned
    *  @param  {Number}   [initThreshold] initial threshold defaults to 0.9
@@ -1652,7 +1652,7 @@ soundfile = function () {
       var data = {};
       var filteredBuffer = e.renderedBuffer;
       var bufferData = filteredBuffer.getChannelData(0);
-      // step 1: 
+      // step 1:
       // create Peak instances, add them to array, with strength and sampleIndex
       do {
         allPeaks = getPeaksAtThreshold(bufferData, threshold);
@@ -1840,7 +1840,7 @@ soundfile = function () {
    *    fill(255);
    *    textAlign(CENTER);
    *    text('click to play', width/2, height/2);
-   *    
+   *
    *    mySound = loadSound('assets/beat.mp3');
    *
    *    // schedule calls to changeText
@@ -1937,7 +1937,7 @@ amplitude = function () {
    *  Amplitude measures volume between 0.0 and 1.0.
    *  Listens to all p5sound by default, or use setInput()
    *  to listen to a specific sound source. Accepts an optional
-   *  smoothing value, which defaults to 0. 
+   *  smoothing value, which defaults to 0.
    *
    *  @class p5.Amplitude
    *  @constructor
@@ -1947,7 +1947,7 @@ amplitude = function () {
    *  @example
    *  <div><code>
    *  var sound, amplitude, cnv;
-   *  
+   *
    *  function preload(){
    *    sound = loadSound('assets/beat.mp3');
    *  }
@@ -2127,7 +2127,7 @@ amplitude = function () {
    *  function preload(){
    *    sound = loadSound('assets/beat.mp3');
    *  }
-   *  function setup() { 
+   *  function setup() {
    *    amplitude = new p5.Amplitude();
    *    sound.play();
    *  }
@@ -2177,7 +2177,7 @@ amplitude = function () {
     }
   };
   /**
-   *  Smooth Amplitude analysis by averaging with the last analysis 
+   *  Smooth Amplitude analysis by averaging with the last analysis
    *  frame. Off by default.
    *
    *  @method smooth
@@ -2202,11 +2202,11 @@ fft = function () {
    *  audio frequencies</a> within a waveform.</p>
    *
    *  <p>Once instantiated, a p5.FFT object can return an array based on
-   *  two types of analyses: <br> • <code>FFT.waveform()</code> computes
+   *  two types of analyses: <br> 鈥� <code>FFT.waveform()</code> computes
    *  amplitude values along the time domain. The array indices correspond
    *  to samples across a brief moment in time. Each value represents
    *  amplitude of the waveform at that sample of time.<br>
-   *  • <code>FFT.analyze() </code> computes amplitude values along the
+   *  鈥� <code>FFT.analyze() </code> computes amplitude values along the
    *  frequency domain. The array indices correspond to frequencies (i.e.
    *  pitches), from the lowest to the highest that humans can hear. Each
    *  value represents amplitude at that slice of the frequency spectrum.
@@ -2218,11 +2218,11 @@ fft = function () {
    *  to as <code>bins</code>. The array is 1024 bins long by default.
    *  You can change the bin array length, but it must be a power of 2
    *  between 16 and 1024 in order for the FFT algorithm to function
-   *  correctly. The actual size of the FFT buffer is twice the 
+   *  correctly. The actual size of the FFT buffer is twice the
    *  number of bins, so given a standard sample rate, the buffer is
    *  2048/44100 seconds long.</p>
-   *  
-   * 
+   *
+   *
    *  @class p5.FFT
    *  @constructor
    *  @param {Number} [smoothing]   Smooth results of Freq Spectrum.
@@ -2248,7 +2248,7 @@ fft = function () {
    *  function draw(){
    *    background(0);
    *
-   *    var spectrum = fft.analyze(); 
+   *    var spectrum = fft.analyze();
    *    noStroke();
    *    fill(0,255,0); // spectrum is green
    *    for (var i = 0; i< spectrum.length; i++){
@@ -2339,8 +2339,8 @@ fft = function () {
    *  Returns an array of amplitude values (between -1.0 and +1.0) that represent
    *  a snapshot of amplitude readings in a single buffer. Length will be
    *  equal to bins (defaults to 1024). Can be used to draw the waveform
-   *  of a sound. 
-   *  
+   *  of a sound.
+   *
    *  @method waveform
    *  @param {Number} [bins]    Must be a power of two between
    *                            16 and 1024. Defaults to 1024.
@@ -2418,7 +2418,7 @@ fft = function () {
    *    freq = constrain(freq, 1, 20000);
    *    osc.freq(freq);
    *
-   *    var spectrum = fft.analyze(); 
+   *    var spectrum = fft.analyze();
    *    noStroke();
    *    fill(0,255,0); // spectrum is green
    *    for (var i = 0; i< spectrum.length; i++){
@@ -2428,7 +2428,7 @@ fft = function () {
    *    }
    *
    *    stroke(255);
-   *    text('Freq: ' + round(freq)+'Hz', 10, 10); 
+   *    text('Freq: ' + round(freq)+'Hz', 10, 10);
    *
    *    isMouseOverCanvas();
    *  }
@@ -2443,7 +2443,7 @@ fft = function () {
    *    }
    *  }
    *  </code></div>
-   *                                   
+   *
    *
    */
   p5.FFT.prototype.analyze = function () {
@@ -2478,12 +2478,12 @@ fft = function () {
    *  to frequency (in Hz), or a String corresponding to predefined
    *  frequency ranges ("bass", "lowMid", "mid", "highMid", "treble").
    *  Returns a range between 0 (no energy/volume at that frequency) and
-   *  255 (maximum energy). 
+   *  255 (maximum energy).
    *  <em>NOTE: analyze() must be called prior to getEnergy(). Analyze()
    *  tells the FFT to analyze frequency data, and getEnergy() uses
    *  the results determine the value at a specific frequency or
    *  range of frequencies.</em></p>
-   *  
+   *
    *  @method  getEnergy
    *  @param  {Number|String} frequency1   Will return a value representing
    *                                energy at this frequency. Alternately,
@@ -2496,7 +2496,7 @@ fft = function () {
    *                                two frequencies.
    *  @return {Number}   Energy   Energy (volume/amplitude) from
    *                              0 and 255.
-   *                                       
+   *
    */
   p5.FFT.prototype.getEnergy = function (frequency1, frequency2) {
     var nyquist = p5sound.audiocontext.sampleRate / 2;
@@ -2552,7 +2552,7 @@ fft = function () {
   };
   /**
    *  Smooth FFT analysis by averaging with the last analysis frame.
-   *  
+   *
    *  @method smooth
    *  @param {Number} smoothing    0.0 < smoothing < 1.0.
    *                               Defaults to 0.8.
@@ -3175,7 +3175,7 @@ signal = function () {
    *  the audio clock must process samples 44100 times per second. If we
    *  want to add a value to each of those samples, we can't do it in the
    *  draw loop, but we can do it by adding a constant-rate audio signal.</p.
-   *  
+   *
    *  <p>This class mostly functions behind the scenes in p5.sound, and returns
    *  a Tone.Signal from the Tone.js library by Yotam Mann.
    *  If you want to work directly with audio signals for modular
@@ -3192,7 +3192,7 @@ signal = function () {
    *    carrier.amp(1); // set amplitude
    *    carrier.freq(220); // set frequency
    *    carrier.start(); // start oscillating
-   *    
+   *
    *    modulator = new p5.Oscillator('sawtooth');
    *    modulator.disconnect();
    *    modulator.amp(1);
@@ -3225,7 +3225,7 @@ signal = function () {
   /**
    *  Connect a p5.sound object or Web Audio node to this
    *  p5.Signal so that its amplitude values can be scaled.
-   *  
+   *
    *  @param {Object} input
    */
   Signal.prototype.setInput = function (_input) {
@@ -3240,7 +3240,7 @@ signal = function () {
    *  and return the resulting audio signal. Does
    *  not change the value of the original signal,
    *  instead it returns a new p5.SignalAdd.
-   *  
+   *
    *  @method  add
    *  @param {Number} number
    *  @return {p5.SignalAdd} object
@@ -3259,7 +3259,7 @@ signal = function () {
    *  and return the resulting audio signal. Does
    *  not change the value of the original signal,
    *  instead it returns a new p5.SignalMult.
-   *  
+   *
    *  @method  mult
    *  @param {Number} number to multiply
    *  @return {Tone.Multiply} object
@@ -3278,7 +3278,7 @@ signal = function () {
    *  and return the result as an audio signal. Does
    *  not change the value of the original signal,
    *  instead it returns a new p5.SignalScale.
-   *  
+   *
    *  @method  scale
    *  @param {Number} number to multiply
    *  @param  {Number} inMin  input range minumum
@@ -3318,7 +3318,7 @@ oscillator = function () {
    *  shape ('sine'). Additional types include 'triangle',
    *  'sawtooth' and 'square'. The frequency defaults to
    *  440 oscillations per second (440Hz, equal to the pitch of an
-   *  'A' note).</p> 
+   *  'A' note).</p>
    *
    *  <p>Set the type of oscillation with setType(), or by creating a
    *  specific oscillator.</p> For example:
@@ -3327,7 +3327,7 @@ oscillator = function () {
    *  <code>new p5.SqrOsc(freq)</code>
    *  <code>new p5.SawOsc(freq)</code>.
    *  </p>
-   *  
+   *
    *  @class p5.Oscillator
    *  @constructor
    *  @param {Number} [freq] frequency defaults to 440Hz
@@ -3339,11 +3339,11 @@ oscillator = function () {
    *  <div><code>
    *  var osc;
    *  var playing = false;
-   *  
+   *
    *  function setup() {
    *    backgroundColor = color(255,0,255);
    *    textAlign(CENTER);
-   *    
+   *
    *    osc = new p5.Oscillator();
    *    osc.setType('sine');
    *    osc.freq(240);
@@ -3469,7 +3469,7 @@ oscillator = function () {
    *  @method  amp
    *  @param  {Number|Object} vol between 0 and 1.0
    *                              or a modulating signal/oscillator
-   *  @param {Number} [rampTime] create a fade that lasts rampTime 
+   *  @param {Number} [rampTime] create a fade that lasts rampTime
    *  @param {Number} [timeFromNow] schedule this event to happen
    *                                seconds from now
    *  @return  {AudioParam} gain  If no value is provided,
@@ -3542,7 +3542,7 @@ oscillator = function () {
       }
       val.connect(this.oscillator.frequency);
       // keep track of what is modulating this param
-      // so it can be re-connected if 
+      // so it can be re-connected if
       this._freqMods.push(val);
     } else {
       // return the Frequency Node
@@ -3624,7 +3624,7 @@ oscillator = function () {
   };
   /**
    *  Set the phase of an oscillator between 0.0 and 1.0
-   *  
+   *
    *  @method  phase
    *  @param  {Number} phase float between 0.0 and 1.0
    */
@@ -3676,12 +3676,12 @@ oscillator = function () {
    *  Add a value to the p5.Oscillator's output amplitude,
    *  and return the oscillator. Calling this method again
    *  will override the initial add() with a new value.
-   *  
+   *
    *  @method  add
    *  @param {Number} number Constant number to add
    *  @return {p5.Oscillator} Oscillator Returns this oscillator
    *                                     with scaled output
-   *  
+   *
    */
   p5.Oscillator.prototype.add = function (num) {
     var add = new Add(num);
@@ -3693,7 +3693,7 @@ oscillator = function () {
    *  Multiply the p5.Oscillator's output amplitude
    *  by a fixed value (i.e. turn it up!). Calling this method
    *  again will override the initial mult() with a new value.
-   *  
+   *
    *  @method  mult
    *  @param {Number} number Constant number to multiply
    *  @return {p5.Oscillator} Oscillator Returns this oscillator
@@ -3709,7 +3709,7 @@ oscillator = function () {
    *  Scale this oscillator's amplitude values to a given
    *  range, and return the oscillator. Calling this method
    *  again will override the initial scale() with new values.
-   *  
+   *
    *  @method  scale
    *  @param  {Number} inMin  input range minumum
    *  @param  {Number} inMax  input range maximum
@@ -3811,7 +3811,7 @@ env = function () {
   // set to true if attack is set, then false on release
   var wasTriggered = false;
   /**
-   *  <p>Envelopes are pre-defined amplitude distribution over time. 
+   *  <p>Envelopes are pre-defined amplitude distribution over time.
    *  The p5.Env accepts up to four time/level pairs, where time
    *  determines how long of a ramp before value reaches level.
    *  Typically, envelopes are used to control the output volume
@@ -3819,7 +3819,7 @@ env = function () {
    *  Sustain and Release (ADSR). But p5.Env can control any
    *  Web Audio Param, for example it can be passed to an Oscillator
    *  frequency like osc.freq(env) </p>
-   *  
+   *
    *  @class p5.Env
    *  @constructor
    *  @param {Number} aTime     Time (in seconds) before level
@@ -3846,7 +3846,7 @@ env = function () {
    *
    *  var env;
    *  var triOsc;
-   *  
+   *
    *  function setup() {
    *    background(0);
    *    noStroke();
@@ -3943,7 +3943,7 @@ env = function () {
    *  If a p5.Sound object is given, then the p5.Env will control its
    *  output gain. If multiple inputs are provided, the env will
    *  control all of them.
-   *  
+   *
    *  @method  setInput
    *  @param  {Object} unit         A p5.sound object or
    *                                Web Audio Param.
@@ -4113,7 +4113,7 @@ env = function () {
    *  Add a value to the p5.Oscillator's output amplitude,
    *  and return the oscillator. Calling this method
    *  again will override the initial add() with new values.
-   *  
+   *
    *  @method  add
    *  @param {Number} number Constant number to add
    *  @return {p5.Env} Envelope Returns this envelope
@@ -4129,7 +4129,7 @@ env = function () {
    *  Multiply the p5.Env's output amplitude
    *  by a fixed value. Calling this method
    *  again will override the initial mult() with new values.
-   *  
+   *
    *  @method  mult
    *  @param {Number} number Constant number to multiply
    *  @return {p5.Env} Envelope Returns this envelope
@@ -4145,7 +4145,7 @@ env = function () {
    *  Scale this envelope's amplitude values to a given
    *  range, and return the envelope. Calling this method
    *  again will override the initial scale() with new values.
-   *  
+   *
    *  @method  scale
    *  @param  {Number} inMin  input range minumum
    *  @param  {Number} inMax  input range maximum
@@ -4186,7 +4186,7 @@ pulse = function () {
    *  width between the pulses. See <a href="
    *  http://p5js.org/reference/#/p5.Oscillator">
    *  <code>p5.Oscillator</code> for a full list of methods.
-   *  
+   *
    *  @class p5.Pulse
    *  @constructor
    *  @param {Number} [freq] Frequency in oscillations per second (Hz)
@@ -4197,7 +4197,7 @@ pulse = function () {
    *  var pulse;
    *  function setup() {
    *    background(0);
-   *    
+   *
    *    // Create and start the pulse wave oscillator
    *    pulse = new p5.Pulse();
    *    pulse.amp(0.5);
@@ -4489,22 +4489,22 @@ noise = function () {
   /**
    *  Set the amplitude of the noise between 0 and 1.0. Or,
    *  modulate amplitude with an audio signal such as an oscillator.
-   *  
+   *
    *  @param  {Number|Object} volume amplitude between 0 and 1.0
    *                                     or modulating signal/oscillator
-   *  @param {Number} [rampTime] create a fade that lasts rampTime 
+   *  @param {Number} [rampTime] create a fade that lasts rampTime
    *  @param {Number} [timeFromNow] schedule this event to happen
    *                                seconds from now
    */
   /**
    *  Send output to a p5.sound or web audio object
-   *  
+   *
    *  @method  connect
    *  @param  {Object} unit
    */
   /**
    *  Disconnect all output.
-   *  
+   *
    *  @method disconnect
    */
   p5.Noise.prototype.dispose = function () {
@@ -4535,10 +4535,10 @@ audioin = function () {
    *  <p>Turn the mic on/off with the start() and stop() methods. When the mic
    *  is on, its volume can be measured with getLevel or by connecting an
    *  FFT object.</p>
-   *  
-   *  <p>If you want to hear the AudioIn, use the .connect() method. 
+   *
+   *  <p>If you want to hear the AudioIn, use the .connect() method.
    *  AudioIn does not connect to p5.sound output by default to prevent
-   *  feedback.</p> 
+   *  feedback.</p>
    *
    *  <p><em>Note: This uses the <a href="http://caniuse.com/stream">getUserMedia/
    *  Stream</a> API, which is not supported by certain browsers.</em></p>
@@ -4644,7 +4644,7 @@ audioin = function () {
   /**
    *  Connect to an audio unit. If no parameter is provided, will
    *  connect to the master output (i.e. your speakers).<br/>
-   *  
+   *
    *  @method  connect
    *  @param  {Object} [unit] An object that accepts audio input,
    *                          such as an FFT
@@ -4664,7 +4664,7 @@ audioin = function () {
   };
   /**
    *  Disconnect the AudioIn from all audio units. For example, if
-   *  connect() had been called, disconnect() will stop sending 
+   *  connect() had been called, disconnect() will stop sending
    *  signal to your speakers.<br/>
    *
    *  @method  disconnect
@@ -4680,7 +4680,7 @@ audioin = function () {
    *  make it easy to get a microphone's volume level. Accepts an
    *  optional smoothing value (0.0 < 1.0). <em>NOTE: AudioIn must
    *  .start() before using .getLevel().</em><br/>
-   *  
+   *
    *  @method  getLevel
    *  @param  {Number} [smoothing] Smoothing is 0.0 by default.
    *                               Smooths values based on previous values.
@@ -4694,7 +4694,7 @@ audioin = function () {
   };
   /**
    *  Add input sources to the list of available sources.
-   *  
+   *
    *  @private
    */
   p5.AudioIn.prototype._gotSources = function (sourceInfos) {
@@ -4736,29 +4736,29 @@ audioin = function () {
     }
   };
   /**
-   * Chrome only. Returns a list of available input sources 
-   * and allows the user to set the media source. Firefox allows 
+   * Chrome only. Returns a list of available input sources
+   * and allows the user to set the media source. Firefox allows
    * the user to choose from input sources in the permissions dialogue
    * instead of enumerating available sources and selecting one.
-   * Note: in order to have descriptive media names your page must be 
-   * served over a secure (HTTPS) connection and the page should 
-   * request user media before enumerating devices. Otherwise device 
-   * ID will be a long device ID number and does not specify device 
-   * type. For example see 
+   * Note: in order to have descriptive media names your page must be
+   * served over a secure (HTTPS) connection and the page should
+   * request user media before enumerating devices. Otherwise device
+   * ID will be a long device ID number and does not specify device
+   * type. For example see
    * https://simpl.info/getusermedia/sources/index.html vs.
    * http://simpl.info/getusermedia/sources/index.html
    *
    * @method  getSources
-   * @param  {Function} callback a callback to handle the sources 
+   * @param  {Function} callback a callback to handle the sources
    *                               when they have been enumerated
    * @example
    *  <div><code>
    *  var audiograb;
-   *      
+   *
    *  function setup(){
    *    //new audioIn
    *    audioGrab = new p5.AudioIn();
-   *    
+   *
    *    audioGrab.getSources(function(sourceList) {
    *      //print out the array of available sources
    *      console.log(sourceList);
@@ -4789,10 +4789,10 @@ audioin = function () {
   /**
    *  Set the input source. Accepts a number representing a
    *  position in the array returned by listSources().
-   *  This is only available in browsers that support 
+   *  This is only available in browsers that support
    *  MediaStreamTrack.getSources(). Instead, some browsers
    *  give users the option to set their own media source.<br/>
-   *  
+   *
    *  @method setSource
    *  @param {number} num position of input source in the array
    */
@@ -4880,7 +4880,7 @@ filter = function () {
    *      var h = -height + map(spectrum[i], 0, 255, height, 0);
    *      rect(x, height, width/spectrum.length, h);
    *    }
-   *    
+   *
    *    isMouseOverCanvas();
    *  }
    *
@@ -4902,7 +4902,7 @@ filter = function () {
      *  The p5.Filter is built with a
      *  <a href="http://www.w3.org/TR/webaudio/#BiquadFilterNode">
      *  Web Audio BiquadFilter Node</a>.
-     *  
+     *
      *  @property biquadFilter
      *  @type {Object}  Web Audio Delay Node
      */
@@ -4917,7 +4917,7 @@ filter = function () {
   /**
    *  Filter an audio signal according to a set
    *  of filter parameters.
-   *  
+   *
    *  @method  process
    *  @param  {Object} Signal  An object that outputs audio
    *  @param {[Number]} freq Frequency in Hz, from 10 to 22050
@@ -4995,11 +4995,11 @@ filter = function () {
     return self.biquad.Q.value;
   };
   /**
-   *  Set the type of a p5.Filter. Possible types include: 
-   *  "lowpass" (default), "highpass", "bandpass", 
+   *  Set the type of a p5.Filter. Possible types include:
+   *  "lowpass" (default), "highpass", "bandpass",
    *  "lowshelf", "highshelf", "peaking", "notch",
-   *  "allpass". 
-   *  
+   *  "allpass".
+   *
    *  @method  setType
    *  @param {String}
    */
@@ -5008,10 +5008,10 @@ filter = function () {
   };
   /**
    *  Set the output level of the filter.
-   *  
+   *
    *  @method  amp
    *  @param {Number} volume amplitude between 0 and 1.0
-   *  @param {Number} [rampTime] create a fade that lasts rampTime 
+   *  @param {Number} [rampTime] create a fade that lasts rampTime
    *  @param {Number} [timeFromNow] schedule this event to happen
    *                                seconds from now
    */
@@ -5026,7 +5026,7 @@ filter = function () {
   };
   /**
    *  Send output to a p5.sound or web audio object
-   *  
+   *
    *  @method connect
    *  @param  {Object} unit
    */
@@ -5036,7 +5036,7 @@ filter = function () {
   };
   /**
    *  Disconnect all output.
-   *  
+   *
    *  @method disconnect
    */
   p5.Filter.prototype.disconnect = function () {
@@ -5047,7 +5047,7 @@ filter = function () {
    *  This is the same as creating a p5.Filter and then calling
    *  its method <code>setType('lowpass')</code>.
    *  See p5.Filter for methods.
-   *  
+   *
    *  @method p5.LowPass
    */
   p5.LowPass = function () {
@@ -5059,7 +5059,7 @@ filter = function () {
    *  This is the same as creating a p5.Filter and then calling
    *  its method <code>setType('highpass')</code>.
    *  See p5.Filter for methods.
-   *  
+   *
    *  @method p5.HighPass
    */
   p5.HighPass = function () {
@@ -5070,8 +5070,8 @@ filter = function () {
    *  Constructor: <code>new p5.BandPass()</code> Filter.
    *  This is the same as creating a p5.Filter and then calling
    *  its method <code>setType('bandpass')</code>.
-   *  See p5.Filter for methods. 
-   *  
+   *  See p5.Filter for methods.
+   *
    *  @method p5.BandPass
    */
   p5.BandPass = function () {
@@ -5092,32 +5092,32 @@ delay = function () {
    *  produce a looping delay that decreases in volume by
    *  50% each repeat. A filter will cut out the high frequencies so
    *  that the delay does not sound as piercing as the original source.
-   *  
+   *
    *  @class p5.Delay
    *  @constructor
    *  @return {Object} Returns a p5.Delay object
    *  @example
    *  <div><code>
    *  var noise, env, delay;
-   *  
+   *
    *  function setup() {
    *    background(0);
    *    noStroke();
    *    fill(255);
    *    textAlign(CENTER);
    *    text('click to play', width/2, height/2);
-   *    
+   *
    *    noise = new p5.Noise('brown');
    *    noise.amp(0);
    *    noise.start();
-   *    
+   *
    *    delay = new p5.Delay();
    *
    *    // delay.process() accepts 4 parameters:
    *    // source, delayTime, feedback, filter frequency
    *    // play with these numbers!!
    *    delay.process(noise, .12, .7, 2300);
-   *    
+   *
    *    // play the noise with an envelope,
    *    // a series of fades ( time / value pairs )
    *    env = new p5.Env(.01, 0.2, .2, .1);
@@ -5144,7 +5144,7 @@ delay = function () {
      *  The p5.Delay is built with two
      *  <a href="http://www.w3.org/TR/webaudio/#DelayNode">
      *  Web Audio Delay Nodes</a>, one for each stereo channel.
-     *  
+     *
      *  @property leftDelay
      *  @type {Object}  Web Audio Delay Node
      */
@@ -5153,7 +5153,7 @@ delay = function () {
      *  The p5.Delay is built with two
      *  <a href="http://www.w3.org/TR/webaudio/#DelayNode">
      *  Web Audio Delay Nodes</a>, one for each stereo channel.
-     *  
+     *
      *  @property rightDelay
      *  @type {Object}  Web Audio Delay Node
      */
@@ -5192,7 +5192,7 @@ delay = function () {
   /**
    *  Add delay to an audio signal according to a set
    *  of delay parameters.
-   *  
+   *
    *  @method  process
    *  @param  {Object} Signal  An object that outputs audio
    *  @param  {Number} [delayTime] Time (in seconds) of the delay/echo.
@@ -5249,7 +5249,7 @@ delay = function () {
    *  time through the loop. A feedback greater than 1.0 is not desirable because
    *  it will increase the overall output each time through the loop,
    *  creating an infinite feedback loop.
-   *  
+   *
    *  @method  feedback
    *  @param {Number|Object} feedback 0.0 to 1.0, or an object such as an
    *                                  Oscillator that can be used to
@@ -5270,9 +5270,9 @@ delay = function () {
   /**
    *  Set a lowpass filter frequency for the delay. A lowpass filter
    *  will cut off any frequencies higher than the filter frequency.
-   *   
+   *
    *  @method  filter
-   *  @param {Number|Object} cutoffFreq  A lowpass filter will cut off any 
+   *  @param {Number|Object} cutoffFreq  A lowpass filter will cut off any
    *                              frequencies higher than the filter frequency.
    *  @param {Number|Object} res  Resonance of the filter frequency
    *                              cutoff, or an object (i.e. a p5.Oscillator)
@@ -5288,7 +5288,7 @@ delay = function () {
    *  Choose a preset type of delay. 'pingPong' bounces the signal
    *  from the left to the right channel to produce a stereo effect.
    *  Any other parameter will revert to the default delay setting.
-   *  
+   *
    *  @method  setType
    *  @param {String|Number} type 'pingPong' (1) or 'default' (0)
    */
@@ -5318,10 +5318,10 @@ delay = function () {
   };
   /**
    *  Set the output level of the delay effect.
-   *  
+   *
    *  @method  amp
    *  @param  {Number} volume amplitude between 0 and 1.0
-   *  @param {Number} [rampTime] create a fade that lasts rampTime 
+   *  @param {Number} [rampTime] create a fade that lasts rampTime
    *  @param {Number} [timeFromNow] schedule this event to happen
    *                                seconds from now
    */
@@ -5336,7 +5336,7 @@ delay = function () {
   };
   /**
    *  Send output to a p5.sound or web audio object
-   *  
+   *
    *  @method  connect
    *  @param  {Object} unit
    */
@@ -5346,7 +5346,7 @@ delay = function () {
   };
   /**
    *  Disconnect all output.
-   *  
+   *
    *  @method disconnect
    */
   p5.Delay.prototype.disconnect = function () {
@@ -5365,7 +5365,7 @@ reverb = function () {
    *  that can be set with the .set() or .process() methods. The p5.Convolver
    *  extends p5.Reverb allowing you to recreate the sound of actual physical
    *  spaces through convolution.
-   *  
+   *
    *  @class p5.Reverb
    *  @constructor
    *  @example
@@ -5405,7 +5405,7 @@ reverb = function () {
   };
   /**
    *  Connect a source to the reverb, and assign reverb parameters.
-   *  
+   *
    *  @method  process
    *  @param  {Object} src     p5.sound / Web Audio object with a sound
    *                           output.
@@ -5435,7 +5435,7 @@ reverb = function () {
   /**
    *  Set the reverb settings. Similar to .process(), but without
    *  assigning a new input.
-   *  
+   *
    *  @method  set
    *  @param  {Number} [seconds] Duration of the reverb, in seconds.
    *                           Min: 0, Max: 10. Defaults to 3.
@@ -5461,10 +5461,10 @@ reverb = function () {
   };
   /**
    *  Set the output level of the delay effect.
-   *  
+   *
    *  @method  amp
    *  @param  {Number} volume amplitude between 0 and 1.0
-   *  @param  {Number} [rampTime] create a fade that lasts rampTime 
+   *  @param  {Number} [rampTime] create a fade that lasts rampTime
    *  @param  {Number} [timeFromNow] schedule this event to happen
    *                                seconds from now
    */
@@ -5479,7 +5479,7 @@ reverb = function () {
   };
   /**
    *  Send output to a p5.sound or web audio object
-   *  
+   *
    *  @method  connect
    *  @param  {Object} unit
    */
@@ -5489,7 +5489,7 @@ reverb = function () {
   };
   /**
    *  Disconnect all output.
-   *  
+   *
    *  @method disconnect
    */
   p5.Reverb.prototype.disconnect = function () {
@@ -5498,7 +5498,7 @@ reverb = function () {
   /**
    *  Inspired by Simple Reverb by Jordan Santell
    *  https://github.com/web-audio-components/simple-reverb/blob/master/index.js
-   * 
+   *
    *  Utility function for building an impulse response
    *  based on the module parameters.
    *
@@ -5541,7 +5541,7 @@ reverb = function () {
    *  physical spaces through a process called <a href="
    *  https://en.wikipedia.org/wiki/Convolution_reverb#Real_space_simulation">
    *  convolution</a>.</p>
-   *  
+   *
    *  <p>Convolution multiplies any audio input by an "impulse response"
    *  to simulate the dispersion of sound over time. The impulse response is
    *  generated from an audio file that you provide. One way to
@@ -5551,7 +5551,7 @@ reverb = function () {
    *
    *  <p>Use the method <code>createConvolution(path)</code> to instantiate a
    *  p5.Convolver with a path to your impulse response audio file.</p>
-   *  
+   *
    *  @class p5.Convolver
    *  @constructor
    *  @param  {String}   path     path to a sound file
@@ -5562,7 +5562,7 @@ reverb = function () {
    *  function preload() {
    *    // We have both MP3 and OGG versions of all sound assets
    *    soundFormats('ogg', 'mp3');
-   *    
+   *
    *    // Try replacing 'bx-spring' with other soundfiles like
    *    // 'concrete-tunnel' 'small-plate' 'drum' 'beatbox'
    *    cVerb = createConvolver('assets/bx-spring.mp3');
@@ -5571,15 +5571,15 @@ reverb = function () {
    *    // 'beat', 'doorbell', lucky_dragons_-_power_melody'
    *    sound = loadSound('assets/Damscray_DancingTiger.mp3');
    *  }
-   *  
+   *
    *  function setup() {
    *    // disconnect from master output...
    *    sound.disconnect();
-   *    
+   *
    *    // ...and process with cVerb
    *    // so that we only hear the convolution
    *    cVerb.process(sound);
-   *    
+   *
    *    sound.play();
    *  }
    *  </code></div>
@@ -5590,7 +5590,7 @@ reverb = function () {
      *  Internally, the p5.Convolver uses the a
      *  <a href="http://www.w3.org/TR/webaudio/#ConvolverNode">
      *  Web Audio Convolver Node</a>.
-     *  
+     *
      *  @property convolverNode
      *  @type {Object}  Web Audio Convolver Node
      */
@@ -5615,9 +5615,9 @@ reverb = function () {
     p5sound.soundArray.push(this);
   };
   p5.Convolver.prototype = Object.create(p5.Reverb.prototype);
-  p5.prototype.registerPreloadMethod('createConvolver');
+  p5.prototype.registerPreloadMethod('createConvolver', p5);
   /**
-   *  Create a p5.Convolver. Accepts a path to a soundfile 
+   *  Create a p5.Convolver. Accepts a path to a soundfile
    *  that will be used to generate an impulse response.
    *
    *  @method  createConvolver
@@ -5630,7 +5630,7 @@ reverb = function () {
    *  function preload() {
    *    // We have both MP3 and OGG versions of all sound assets
    *    soundFormats('ogg', 'mp3');
-   *    
+   *
    *    // Try replacing 'bx-spring' with other soundfiles like
    *    // 'concrete-tunnel' 'small-plate' 'drum' 'beatbox'
    *    cVerb = createConvolver('assets/bx-spring.mp3');
@@ -5639,15 +5639,15 @@ reverb = function () {
    *    // 'beat', 'doorbell', lucky_dragons_-_power_melody'
    *    sound = loadSound('assets/Damscray_DancingTiger.mp3');
    *  }
-   *  
+   *
    *  function setup() {
    *    // disconnect from master output...
    *    sound.disconnect();
-   *    
+   *
    *    // ...and process with cVerb
    *    // so that we only hear the convolution
    *    cVerb.process(sound);
-   *    
+   *
    *    sound.play();
    *  }
    *  </code></div>
@@ -5664,7 +5664,7 @@ reverb = function () {
   /**
    *  Private method to load a buffer as an Impulse Response,
    *  assign it to the convolverNode, and add to the Array of .impulses.
-   *  
+   *
    *  @param   {String}   path
    *  @param   {Function} callback
    *  @private
@@ -5695,7 +5695,7 @@ reverb = function () {
   p5.Convolver.prototype.set = null;
   /**
    *  Connect a source to the reverb, and assign reverb parameters.
-   *  
+   *
    *  @method  process
    *  @param  {Object} src     p5.sound / Web Audio object with a sound
    *                           output.
@@ -5704,20 +5704,20 @@ reverb = function () {
    *  var cVerb, sound;
    *  function preload() {
    *    soundFormats('ogg', 'mp3');
-   *    
+   *
    *    cVerb = createConvolver('assets/concrete-tunnel.mp3');
    *
    *    sound = loadSound('assets/beat.mp3');
    *  }
-   *  
+   *
    *  function setup() {
    *    // disconnect from master output...
    *    sound.disconnect();
-   *    
+   *
    *    // ...and process with (i.e. connect to) cVerb
    *    // so that we only hear the convolution
    *    cVerb.process(sound);
-   *    
+   *
    *    sound.play();
    *  }
    *  </code></div>
@@ -5729,7 +5729,7 @@ reverb = function () {
    *  If you load multiple impulse files using the .addImpulse method,
    *  they will be stored as Objects in this Array. Toggle between them
    *  with the <code>toggleImpulse(id)</code> method.
-   *  
+   *
    *  @property impulses
    *  @type {Array} Array of Web Audio Buffers
    */
@@ -5739,7 +5739,7 @@ reverb = function () {
    *  The impulse is added to the <code>.impulses</code> array. Previous
    *  impulses can be accessed with the <code>.toggleImpulse(id)</code>
    *  method.
-   *  
+   *
    *  @method  addImpulse
    *  @param  {String}   path     path to a sound file
    *  @param  {[Function]} callback function (optional)
@@ -5754,7 +5754,7 @@ reverb = function () {
   /**
    *  Similar to .addImpulse, except that the <code>.impulses</code>
    *  Array is reset to save memory. A new <code>.impulses</code>
-   *  array is created with this impulse as the only item. 
+   *  array is created with this impulse as the only item.
    *
    *  @method  resetImpulse
    *  @param  {String}   path     path to a sound file
@@ -5780,8 +5780,8 @@ reverb = function () {
    *  Web Audio <a href="
    *  http://webaudio.github.io/web-audio-api/#the-audiobuffer-interface">
    *  AudioBuffer)</a> and a <code>.name</code>, a String that corresponds
-   *  with the original filename. 
-   *  
+   *  with the original filename.
+   *
    *  @method toggleImpulse
    *  @param {String|Number} id Identify the impulse by its original filename
    *                            (String), or by its position in the
@@ -5987,7 +5987,7 @@ looper = function () {
   /**
    *  Set the global tempo, in beats per minute, for all
    *  p5.Parts. This method will impact all active p5.Parts.
-   *  
+   *
    *  @param {Number} BPM      Beats Per Minute
    *  @param {Number} rampTime Seconds from now
    */
@@ -6000,20 +6000,20 @@ looper = function () {
   /**
    *  <p>A phrase is a pattern of musical events over time, i.e.
    *  a series of notes and rests.</p>
-   *  
+   *
    *  <p>Phrases must be added to a p5.Part for playback, and
    *  each part can play multiple phrases at the same time.
    *  For example, one Phrase might be a kick drum, another
    *  could be a snare, and another could be the bassline.</p>
-   *  
+   *
    *  <p>The first parameter is a name so that the phrase can be
    *  modified or deleted later. The callback is a a function that
-   *  this phrase will call at every step—for example it might be
+   *  this phrase will call at every step鈥攆or example it might be
    *  called <code>playNote(value){}</code>. The array determines
    *  which value is passed into the callback at each step of the
    *  phrase. It can be numbers, an object with multiple numbers,
    *  or a zero (0) indicates a rest so the callback won't be called).</p>
-   * 
+   *
    *  @class p5.Phrase
    *  @constructor
    *  @param {String}   name     Name so that you can access the Phrase.
@@ -6031,17 +6031,17 @@ looper = function () {
    *  var mySound, myPhrase, myPart;
    *  var pattern = [1,0,0,2,0,2,0,0];
    *  var msg = 'click to play';
-   *  
+   *
    *  function preload() {
    *    mySound = loadSound('assets/beatbox.mp3');
    *  }
-   *  
+   *
    *  function setup() {
    *    noStroke();
    *    fill(255);
    *    textAlign(CENTER);
    *    masterVolume(0.1);
-   *    
+   *
    *    myPhrase = new p5.Phrase('bbox', makeSound, pattern);
    *    myPart = new p5.Part();
    *    myPart.addPhrase(myPhrase);
@@ -6057,7 +6057,7 @@ looper = function () {
    *    mySound.rate(playbackRate);
    *    mySound.play(time);
    *  }
-   *  
+   *
    *  function mouseClicked() {
    *    if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
    *      myPart.start();
@@ -6077,7 +6077,7 @@ looper = function () {
      * function's requirements, these values may be numbers,
      * strings, or an object with multiple parameters.
      * Zero (0) indicates a rest.
-     * 
+     *
      * @property sequence
      * @type {Array}
      */
@@ -6088,7 +6088,7 @@ looper = function () {
    *  with steps and tatums. By default, each step represents 1/16th note.</p>
    *
    *  <p>See p5.Phrase for more about musical timing.</p>
-   *  
+   *
    *  @class p5.Part
    *  @constructor
    *  @param {Number} [steps]   Steps in the part
@@ -6099,12 +6099,12 @@ looper = function () {
    *  var boxPat = [1,0,0,2,0,2,0,0];
    *  var drumPat = [0,1,1,0,2,0,1,0];
    *  var msg = 'click to play';
-   *  
+   *
    *  function preload() {
    *    box = loadSound('assets/beatbox.mp3');
    *    drum = loadSound('assets/drum.mp3');
    *  }
-   *  
+   *
    *  function setup() {
    *    noStroke();
    *    fill(255);
@@ -6129,12 +6129,12 @@ looper = function () {
    *    box.rate(playbackRate);
    *    box.play(time);
    *  }
-   *  
+   *
    *  function playDrum(time, playbackRate) {
    *    drum.rate(playbackRate);
    *    drum.play(time);
    *  }
-   *  
+   *
    *  function mouseClicked() {
    *    if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
    *      myPart.start();
@@ -6165,8 +6165,8 @@ looper = function () {
     };
   };
   /**
-   *  Set the tempo of this part, in Beats Per Minute. 
-   *  
+   *  Set the tempo of this part, in Beats Per Minute.
+   *
    *  @method  setBPM
    *  @param {Number} BPM      Beats Per Minute
    *  @param {Number} [rampTime] Seconds from now
@@ -6176,9 +6176,9 @@ looper = function () {
   };
   /**
    *  Returns the Beats Per Minute of this currently part.
-   *  
+   *
    *  @method getBPM
-   *  @return {Number} 
+   *  @return {Number}
    */
   p5.Part.prototype.getBPM = function () {
     return this.metro.getBPM();
@@ -6187,7 +6187,7 @@ looper = function () {
    *  Start playback of this part. It will play
    *  through all of its phrases at a speed
    *  determined by setBPM.
-   *  
+   *
    *  @method  start
    *  @param  {Number} [time] seconds from now
    */
@@ -6203,7 +6203,7 @@ looper = function () {
    *  Loop playback of this part. It will begin
    *  looping through all of its phrases at a speed
    *  determined by setBPM.
-   *  
+   *
    *  @method  loop
    *  @param  {Number} [time] seconds from now
    */
@@ -6230,7 +6230,7 @@ looper = function () {
   };
   /**
    *  Stop the part and cue it to step 0.
-   *  
+   *
    *  @method  stop
    *  @param  {Number} [time] seconds from now
    */
@@ -6241,7 +6241,7 @@ looper = function () {
   /**
    *  Pause the part. Playback will resume
    *  from the current step.
-   *  
+   *
    *  @method  pause
    *  @param  {Number} time seconds from now
    */
@@ -6274,7 +6274,7 @@ looper = function () {
   /**
    *  Remove a phrase from this part, based on the name it was
    *  given when it was created.
-   *  
+   *
    *  @method  removePhrase
    *  @param  {String} phraseName
    */
@@ -6288,7 +6288,7 @@ looper = function () {
   /**
    *  Get a phrase from this part, based on the name it was
    *  given when it was created. Now you can modify its array.
-   *  
+   *
    *  @method  getPhrase
    *  @param  {String} phraseName
    */
@@ -6302,7 +6302,7 @@ looper = function () {
   /**
    *  Get a phrase from this part, based on the name it was
    *  given when it was created. Now you can modify its array.
-   *  
+   *
    *  @method  replaceSequence
    *  @param  {String} phraseName
    *  @param  {Array} sequence  Array of values to pass into the callback
@@ -6381,7 +6381,7 @@ looper = function () {
   };
   /**
    *  Start playback of the score.
-   *  
+   *
    *  @method  start
    */
   p5.Score.prototype.start = function () {
@@ -6390,7 +6390,7 @@ looper = function () {
   };
   /**
    *  Stop playback of the score.
-   *  
+   *
    *  @method  stop
    */
   p5.Score.prototype.stop = function () {
@@ -6400,7 +6400,7 @@ looper = function () {
   };
   /**
    *  Pause playback of the score.
-   *  
+   *
    *  @method  pause
    */
   p5.Score.prototype.pause = function () {
@@ -6408,7 +6408,7 @@ looper = function () {
   };
   /**
    *  Loop playback of the score.
-   *  
+   *
    *  @method  loop
    */
   p5.Score.prototype.loop = function () {
@@ -6419,7 +6419,7 @@ looper = function () {
    *  Stop looping playback of the score. If it
    *  is currently playing, this will go into effect
    *  after the current round of playback completes.
-   *  
+   *
    *  @method  noLoop
    */
   p5.Score.prototype.noLoop = function () {
@@ -6439,7 +6439,7 @@ looper = function () {
   };
   /**
    *  Set the tempo for all parts in the score
-   *  
+   *
    *  @param {Number} BPM      Beats Per Minute
    *  @param {Number} rampTime Seconds from now
    */
@@ -6473,28 +6473,28 @@ soundRecorder = function () {
    *  When playback is stopped (either after the given amount of time,
    *  or with the stop() method), the p5.SoundRecorder will send its
    *  recording to that p5.SoundFile for playback.</p>
-   *  
+   *
    *  @class p5.SoundRecorder
    *  @constructor
    *  @example
    *  <div><code>
    *  var mic, recorder, soundFile;
    *  var state = 0;
-   *  
+   *
    *  function setup() {
    *    background(200);
    *    // create an audio in
    *    mic = new p5.AudioIn();
-   *    
+   *
    *    // prompts user to enable their browser mic
    *    mic.start();
-   *    
+   *
    *    // create a sound recorder
    *    recorder = new p5.SoundRecorder();
-   *    
+   *
    *    // connect the mic to the recorder
    *    recorder.setInput(mic);
-   *    
+   *
    *    // this sound file will be used to
    *    // playback & save the recording
    *    soundFile = new p5.SoundFile();
@@ -6505,10 +6505,10 @@ soundRecorder = function () {
    *  function keyPressed() {
    *    // make sure user enabled the mic
    *    if (state === 0 && mic.enabled) {
-   *    
+   *
    *      // record to our p5.SoundFile
    *      recorder.record(soundFile);
-   *      
+   *
    *      background(255,0,0);
    *      text('Recording!', 20, 20);
    *      state++;
@@ -6518,12 +6518,12 @@ soundRecorder = function () {
    *
    *      // stop recorder and
    *      // send result to soundFile
-   *      recorder.stop(); 
-   *      
+   *      recorder.stop();
+   *
    *      text('Stopped', 20, 20);
    *      state++;
    *    }
-   *    
+   *
    *    else if (state === 2) {
    *      soundFile.play(); // play the result!
    *      save(soundFile, 'mySound.wav');
@@ -6543,7 +6543,7 @@ soundRecorder = function () {
     // initialize variables
     this._jsNode = ac.createScriptProcessor(this.bufferSize, this._channels, 2);
     this._jsNode.onaudioprocess = this._audioprocess.bind(this);
-    /** 
+    /**
      *  callback invoked when the recording is over
      *  @private
      *  @type {function(Float32Array)}
@@ -6560,7 +6560,7 @@ soundRecorder = function () {
    *  Connect a specific device to the p5.SoundRecorder.
    *  If no parameter is given, p5.SoundRecorer will record
    *  all audible p5.sound from your sketch.
-   *  
+   *
    *  @method  setInput
    *  @param {Object} [unit] p5.sound object or a web audio unit
    *                         that outputs sound
@@ -6585,7 +6585,7 @@ soundRecorder = function () {
    *  (in seconds) of the recording, and a callback function that
    *  will be called once the complete recording has been
    *  transfered to the p5.SoundFile.
-   *  
+   *
    *  @method  record
    *  @param  {p5.SoundFile}   soundFile    p5.SoundFile
    *  @param  {Number}   [duration] Time (in seconds)
@@ -6615,7 +6615,7 @@ soundRecorder = function () {
    *  the results will be sent to the p5.SoundFile that
    *  was given on .record(), and if a callback function
    *  was provided on record, that function will be called.
-   *  
+   *
    *  @method  stop
    */
   p5.SoundRecorder.prototype.stop = function () {
@@ -6631,9 +6631,9 @@ soundRecorder = function () {
   };
   /**
    *  internal method called on audio process
-   *  
+   *
    *  @private
-   *  @param   {AudioProcessorEvent} event 
+   *  @param   {AudioProcessorEvent} event
    */
   p5.SoundRecorder.prototype._audioprocess = function (event) {
     if (this.recording === false) {
@@ -6682,7 +6682,7 @@ soundRecorder = function () {
   };
   /**
    *  Save a p5.SoundFile as a .wav audio file.
-   *  
+   *
    *  @method saveSound
    *  @param  {p5.SoundFile} soundFile p5.SoundFile that you wish to save
    *  @param  {String} name      name of the resulting .wav file.
@@ -6778,7 +6778,7 @@ peakdetect = function () {
    *  href="http://www.airtightinteractive.com/2013/10/making-audio-reactive-visuals/"
    *  target="_blank">Felix Turner</a>.
    *  </p>
-   *  
+   *
    *  @class  p5.PeakDetect
    *  @constructor
    *  @param {Number} [freq1]     lowFrequency - defaults to 20Hz
@@ -6789,7 +6789,7 @@ peakdetect = function () {
    *  @param {Number} [framesPerPeak]     Defaults to 20.
    *  @example
    *  <div><code>
-   *  
+   *
    *  var cnv, soundFile, fft, peakDetect;
    *  var ellipseWidth = 10;
    *
@@ -6845,7 +6845,7 @@ peakdetect = function () {
     this.decayRate = 0.95;
     this.threshold = threshold || 0.35;
     this.cutoff = 0;
-    // how much to increase the cutoff 
+    // how much to increase the cutoff
     // TO DO: document this / figure out how to make it accessible
     this.cutoffMult = 1.5;
     this.energy = 0;
@@ -6854,7 +6854,7 @@ peakdetect = function () {
     this.currentValue = 0;
     /**
      *  isDetected is set to true when a peak is detected.
-     *  
+     *
      *  @attribute isDetected
      *  @type {Boolean}
      *  @default  false
@@ -6901,7 +6901,7 @@ peakdetect = function () {
    *  onPeak accepts two arguments: a function to call when
    *  a peak is detected. The value of the peak,
    *  between 0.0 and 1.0, is passed to the callback.
-   *   
+   *
    *  @method  onPeak
    *  @param  {Function} callback Name of a function that will
    *                              be called when a peak is
@@ -6913,38 +6913,38 @@ peakdetect = function () {
    *  <div><code>
    *  var cnv, soundFile, fft, peakDetect;
    *  var ellipseWidth = 0;
-   *  
+   *
    *  function setup() {
    *    cnv = createCanvas(100,100);
    *    textAlign(CENTER);
-   *  
+   *
    *    soundFile = loadSound('assets/beat.mp3');
    *    fft = new p5.FFT();
    *    peakDetect = new p5.PeakDetect();
-   *  
+   *
    *    setupSound();
-   *  
+   *
    *    // when a beat is detected, call triggerBeat()
    *    peakDetect.onPeak(triggerBeat);
    *  }
-   *  
+   *
    *  function draw() {
    *    background(0);
    *    fill(255);
    *    text('click to play', width/2, height/2);
-   *  
+   *
    *    fft.analyze();
    *    peakDetect.update(fft);
-   *  
+   *
    *    ellipseWidth *= 0.95;
    *    ellipse(width/2, height/2, ellipseWidth, ellipseWidth);
    *  }
-   *  
+   *
    *  // this function is called by peakDetect.onPeak
    *  function triggerBeat() {
    *    ellipseWidth = 50;
    *  }
-   *  
+   *
    *  // mouseclick starts/stops sound
    *  function setupSound() {
    *    cnv.mouseClicked( function() {
@@ -6969,70 +6969,70 @@ gain = function () {
   'use strict';
   var p5sound = master;
   /**
-    *  A gain node is usefull to set the relative volume of sound.
-    *  It's typically used to build mixers.	  
-    *
-    *  @class p5.Gain
-    *  @constructor
-    *  @example
-    *  <div><code>
-   *
-   *	// load two soundfile and crossfade beetween them
-   *	var sound1,sound2;
-   *	var gain1, gain2, gain3;
-   *	
-   *	function preload(){
-  	*		soundFormats('ogg', 'mp3');
-  	*		sound1 = loadSound('../_files/Damscray_-_Dancing_Tiger_01');
-  	*		sound2 = loadSound('../_files/beat.mp3');
-   *	}
-   *
-   *	function setup() {
-  	*		createCanvas(400,200);
-   *
-  	*		// create a 'master' gain to which we will connect both soundfiles
-  	*		gain3 = new p5.Gain();
-  	*		gain3.connect();
-   *
-  	*		// setup first sound for playing
-  	*		sound1.rate(1);
-  	*		sound1.loop();
-  	*		sound1.disconnect(); // diconnect from p5 output
-   *
-  	*		gain1 = new p5.Gain(); // setup a gain node
-  	*		gain1.setInput(sound1); // connect the first sound to its input
-  	*		gain1.connect(gain3); // connect its output to the 'master'
-   *
-  	*		sound2.rate(1);
-  	*		sound2.disconnect();
-  	*		sound2.loop();
-   *
-  	*		gain2 = new p5.Gain();
-  	*		gain2.setInput(sound2);
-  	*		gain2.connect(gain3);
-   *
-   *	}
-   *
-   *	function draw(){
-    *		background(180);
-   *  
-  	*		// calculate the horizontal distance beetween the mouse and the right of the screen
-  	*		var d = dist(mouseX,0,width,0);
-   *
-  	*		// map the horizontal position of the mouse to values useable for volume control of sound1
-  	*		var vol1 = map(mouseX,0,width,0,1); 
-  	*		var vol2 = 1-vol1; // when sound1 is loud, sound2 is quiet and vice versa
-   *
-  	*		gain1.amp(vol1,0.5,0);
-  	*		gain2.amp(vol2,0.5,0);
-   *
-  	*		// map the vertical position of the mouse to values useable for 'master volume control'
-  	*		var vol3 = map(mouseY,0,height,0,1); 
-  	*		gain3.amp(vol3,0.5,0);
-   	*	}
-   	*</code></div>
-   	*
-   	*/
+  *  A gain node is usefull to set the relative volume of sound.
+  *  It's typically used to build mixers.
+  *
+  *  @class p5.Gain
+  *  @constructor
+  *  @example
+  *  <div><code>
+  *
+  * // load two soundfile and crossfade beetween them
+  * var sound1,sound2;
+  * var gain1, gain2, gain3;
+  *
+  * function preload(){
+  *   soundFormats('ogg', 'mp3');
+  *   sound1 = loadSound('../_files/Damscray_-_Dancing_Tiger_01');
+  *   sound2 = loadSound('../_files/beat.mp3');
+  * }
+  *
+  * function setup() {
+  *   createCanvas(400,200);
+  *
+  *   // create a 'master' gain to which we will connect both soundfiles
+  *   gain3 = new p5.Gain();
+  *   gain3.connect();
+  *
+  *   // setup first sound for playing
+  *   sound1.rate(1);
+  *   sound1.loop();
+  *   sound1.disconnect(); // diconnect from p5 output
+  *
+  *   gain1 = new p5.Gain(); // setup a gain node
+  *   gain1.setInput(sound1); // connect the first sound to its input
+  *   gain1.connect(gain3); // connect its output to the 'master'
+  *
+  *   sound2.rate(1);
+  *   sound2.disconnect();
+  *   sound2.loop();
+  *
+  *   gain2 = new p5.Gain();
+  *   gain2.setInput(sound2);
+  *   gain2.connect(gain3);
+  *
+  * }
+  *
+  * function draw(){
+  *   background(180);
+  *
+  *   // calculate the horizontal distance beetween the mouse and the right of the screen
+  *   var d = dist(mouseX,0,width,0);
+  *
+  *   // map the horizontal position of the mouse to values useable for volume control of sound1
+  *   var vol1 = map(mouseX,0,width,0,1);
+  *   var vol2 = 1-vol1; // when sound1 is loud, sound2 is quiet and vice versa
+  *
+  *   gain1.amp(vol1,0.5,0);
+  *   gain2.amp(vol2,0.5,0);
+  *
+  *   // map the vertical position of the mouse to values useable for 'master volume control'
+  *   var vol3 = map(mouseY,0,height,0,1);
+  *   gain3.amp(vol3,0.5,0);
+  * }
+  *</code></div>
+  *
+  */
   p5.Gain = function () {
     this.ac = p5sound.audiocontext;
     this.input = this.ac.createGain();
@@ -7043,7 +7043,7 @@ gain = function () {
   };
   /**
    *  Connect a source to the gain node.
-   *  
+   *
    *  @method  setInput
    *  @param  {Object} src     p5.sound / Web Audio object with a sound
    *                           output.
@@ -7053,7 +7053,7 @@ gain = function () {
   };
   /**
    *  Send output to a p5.sound or web audio object
-   *  
+   *
    *  @method  connect
    *  @param  {Object} unit
    */
@@ -7063,7 +7063,7 @@ gain = function () {
   };
   /**
    *  Disconnect all output.
-   *  
+   *
    *  @method disconnect
    */
   p5.Gain.prototype.disconnect = function () {
@@ -7071,10 +7071,10 @@ gain = function () {
   };
   /**
    *  Set the output level of the gain node.
-   *  
+   *
    *  @method  amp
    *  @param  {Number} volume amplitude between 0 and 1.0
-   *  @param  {Number} [rampTime] create a fade that lasts rampTime 
+   *  @param  {Number} [rampTime] create a fade that lasts rampTime
    *  @param  {Number} [timeFromNow] schedule this event to happen
    *                                seconds from now
    */
