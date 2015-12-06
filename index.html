@@ -84,7 +84,7 @@
 
           function gotData(data) {
             var entity = data.entities[Object.keys(data.entities)]
-            if (entity=="-1"){
+            if (entity==-1){
               createP('Wrong Name')
             }else{
               var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time
