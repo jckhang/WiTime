@@ -19,7 +19,8 @@
     var output;
 
     function setup() {
-      noCanvas();
+      canvas = createCanvas(1075,500);
+      canvas.position(20,180);
       nameP = createP('Search births by his/her name');
       nameP.position(220,92);
       nameP.mousePressed(gotData);
@@ -55,7 +56,7 @@
         var colorA = (deathdateA[0] - birthdateA[0]) * 2.5;
         var wordContentA = input.value() + " :  " + birthdate.slice(1,11) + " to " + deathdate.slice(1,11)
 
-        nameP(deathdateA[0] + "-" + birthdateA[0]);
+        nameP.html(deathdateA[0] + "-" + birthdateA[0]);
         stroke(colorA, 0, 255, 150);
         line(wordLocationXAa, wordLocationYA, wordLocationXAa, height);
         pop();
