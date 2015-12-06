@@ -87,11 +87,30 @@
             if (Object.keys(data.entities)=="-1"){
               createP('Wrong Name');
             }else{
+              // var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time
+              // var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time
+              // var birthdateA = birthdate.slice(1,11).split('-');
+              // var deathdateA = deathdate.slice(1,11).split('-');
+              // createP(input.value() + " :  " + birthdateA[0] + " to " + deathdateA[0]);
               var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time
               var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time
+
               var birthdateA = birthdate.slice(1,11).split('-');
               var deathdateA = deathdate.slice(1,11).split('-');
-              createP(input.value() + " :  " + birthdateA[0] + " to " + deathdateA[0]);
+              var wordLocationXAa = (birthdateA[0] - 1800) * 5;
+              var wordLocationYA = height - (deathdateA[0] - birthdateA[0]) * 5;
+              var colorA = (deathdateA[0] - birthdateA[0]) * 2.5;
+              var wordContentA = input.value() + " :  " + birthdate.slice(1,11) + " to " + deathdate.slice(1,11)
+
+              nameP.html(deathdateA[3] + "-" + deathdateA[0]);
+              stroke(colorA, 0, 255, 150);
+              line(wordLocationXAa, wordLocationYA, wordLocationXAa, height);
+              pop();
+              push();
+              noStroke();
+              fill(colorA, 0,255);
+              text(wordContentA, wordLocationXAa, (wordLocationYA - 5));
+              pop();
             }
           }
         </script>
