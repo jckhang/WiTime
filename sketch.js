@@ -18,9 +18,9 @@ function search() {
 }
 
 function gotData(data) {
-  entity = data.entities
-  birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time
-  deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time
+  var entity = data.entities
+  var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time
+  var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time
   createP(input.value() + ":" + birthdate + "-" + deathdate);
 
 }
