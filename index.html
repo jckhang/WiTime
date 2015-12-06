@@ -16,10 +16,10 @@
   <script src="//cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 
   <div id='timeline-embed' style="width: 100%; height: 600px"></div>
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
     timeline = new TL.Timeline('timeline-embed',
       'https://docs.google.com/spreadsheets/d/14mfh_3JhEhWZVWCmw1VfXCvuNAEycUrGQUrcMwI8LNY/edit#gid=0&vpid=A1');
-  </script>
+  </script> -->
   <script data-cfasync="false" src="./insert-new_files/jquery.min.js"></script>
   <script type="text/javascript">
     //<![CDATA[
@@ -71,7 +71,6 @@
 
           function setup() {
             noCanvas();
-
             input = select('#search');
             output = select('#date');
             var button = select('#submit');
@@ -112,7 +111,7 @@
         <input type="submit" value="Send">
       </form>
 
-      <script data-cfasync="false" type="text/javascript">
+      <!-- <script data-cfasync="false" type="text/javascript">
         jQuery(document).ready(function($) {
           // variable to hold request
           var request;
@@ -170,7 +169,7 @@
             event.preventDefault();
           });
         });
-      </script>
+      </script> -->
     </div>
   </body>
 
