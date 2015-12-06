@@ -74,7 +74,7 @@
             nameP = createP('Search births by his/her name');
             nameP.position(220,92);
             nameP.mousePressed(gotData);
-            
+
             input = select('#search');
             var button = select('#submit');
             button.mousePressed(search);
@@ -106,7 +106,7 @@
               var colorA = (deathdateA[0] - birthdateA[0]) * 2.5;
               var wordContentA = input.value() + " :  " + birthdate.slice(1,11) + " to " + deathdate.slice(1,11)
 
-              createP(deathdateA[0] + "-" + birthdateA[0]);
+              nameP(deathdateA[0] + "-" + birthdateA[0]);
               stroke(colorA, 0, 255, 150);
               line(wordLocationXAa, wordLocationYA, wordLocationXAa, height);
               pop();
