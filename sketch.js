@@ -12,24 +12,15 @@ function setup() {
 
 function search() {
   var term = input.value();
-  var url = 'https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&rvsection=0&format=json' + '&titles=' + term;
+  //var url = 'https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&rvsection=0&format=json' + '&titles=' + term;
+  var url = 'https://www.wikidata.org/w/api.php?action=wbgetentities&sites=enwiki&languages=en&format=json' + '&titles=' + term;
   loadJSON(url, gotData, 'jsonp');
 }
 
 function gotData(data) {
-  for (key in data.query.pages) {
+  entity = data.entities
+  birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time
+  deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time
+  createP(input.value() + ":" + birthdate + "-" + deathdate);
 
-    var birthdeath = (data.query.pages[key].revisions[0]["*"]);
-
-    if (birthdeath.indexOf("|df=yes|") > 0) {
-      var deathdateA = (birthdeath.split("{{Death date and age|df=yes|")[1].split("}}")[0].split("|"));
-      createP(input.value() + ":" + deathdateA[3] + "-" + deathdateA[0]);
-
-    }
-    if ((birthdeath.indexOf("df=y}}") > 0) || (birthdeath.indexOf("mf=y") > 0)) {
-      var deathdateB = (birthdeath.split("{{death date and age|")[1].split("}}")[0].split("|"));
-      createP(input.value() + ":" + deathdateB[3] + "-" + deathdateB[0]);
-
-    }
-  }
 }
