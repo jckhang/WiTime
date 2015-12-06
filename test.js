@@ -36,8 +36,8 @@ function gotData(data) {
     var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time
     var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time
 
-    var birthdateA = (birthdate.split('-');
-    var deathdateA = (deathdate.split('-');
+    var birthdateA = birthdate.split('-');
+    var deathdateA = deathdate.split('-');
     var wordLocationXAa = (birthdateA[0] - 1800) * 5;
     var wordLocationYA = height - (deathdateA[0] - birthdateA[0]) * 5;
     var colorA = (deathdateA[0] - birthdateA[0]) * 2.5;
