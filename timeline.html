@@ -57,12 +57,13 @@
 
       <div class="container-fluid" style="padding:20px">
         <h3> Type a name
-          <h5> Name:
+          <p>
+          Name:
             <input id="search" value="Albert Einstein"></input>
-            <button type="button" id="submit">
-              search
-            </button>
-          </h5>
+          </p>
+          <p>
+            <button id="submit">search</button>
+          </p>
         </h3>
         <script data-cfasync="false" type="text/javascript">
           var input;
@@ -70,8 +71,11 @@
 
           function setup() {
             noCanvas();
+            nameP = createP('Search births by his/her name');
+            nameP.position(220,92);
+            nameP.mousePressed(gotData);
+            
             input = select('#search');
-            output = select('#date');
             var button = select('#submit');
             button.mousePressed(search);
           }
@@ -85,7 +89,7 @@
           function gotData(data) {
             var entity = data.entities[Object.keys(data.entities)];
             if (Object.keys(data.entities)=="-1"){
-              createP('Wrong Name');
+              nameP.html("This is not a name..");
             }else{
               // var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time
               // var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time
