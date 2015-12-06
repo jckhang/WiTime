@@ -1,8 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE html>
 <html>
 
 <head>
+  <style type="text/css">
+  body {
+    color: #ffffff;
+    background-color: #000000 }
+  </style>
+
   <meta charset="UTF-8">
   <title>Information Filter of Wikipedia</title>
   <script src="libraries/p5.js" type="text/javascript"></script>
@@ -11,169 +17,33 @@
   <script src="libraries/p5.dom.js" type="text/javascript"></script>
   <script src="libraries/p5.sound.js" type="text/javascript"></script>
 
-  <link href="css/style.css" rel="stylesheet">
-  <link title="timeline-styles" rel="stylesheet" href="//cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
-  <script src="//cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+  <script src="test.js" type="text/javascript"></script>
 
-  <!-- <div id='timeline-embed' style="width: 100%; height: 600px"></div> -->
-  <!-- <script type="text/javascript">
-    timeline = new TL.Timeline('timeline-embed', 'https://docs.google.com/spreadsheets/d/14mfh_3JhEhWZVWCmw1VfXCvuNAEycUrGQUrcMwI8LNY/edit#gid=0&vpid=A1');
-  </script> -->
-  <script data-cfasync="false" src="./insert-new_files/jquery.min.js"></script>
-  <!-- <script type="text/javascript">
-    //<![CDATA[
-    try {
-      if (!window.CloudFlare) {
-        var CloudFlare = [{
-          verbose: 0,
-          p: 0,
-          byc: 0,
-          owlid: "cf",
-          bag2: 1,
-          mirage2: 0,
-          oracle: 0,
-          paths: {
-            cloudflare: "/cdn-cgi/nexp/dok3v=1613a3a185/"
-          },
-          atok: "7e5569d16072e3c51ca01932ebbb5806",
-          petok: "a9d31e8512673768bf1246974a107ce8e449bed6-1448741590-1800",
-          zone: "hawksey.info",
-          rocket: "a",
-          apps: {},
-          sha2test: 0
-        }];
-        document.write('<script type="text/javascript" src="//ajax.cloudflare.com/cdn-cgi/nexp/dok3v=38857570ac/cloudflare.min.js"><' + '\/script>');
-      }
-    } catch (e) {};
-    //]]>
-  </script> -->
+  <style>
+    body {
+      padding: 20px;
+    }
+  </style>
 
-  <body>
+</head>
 
-    <div class="container">
-      <div class="container-fluid" style="padding:20px">
-        <h1>Information Filter of Wikipedia</h1>
-      </div>
+<body>
 
-      <div class="container-fluid" style="padding:20px">
-        <h3> Type a name
-          <h5> Name:
-            <input id="search" value="Albert Einstein"></input>
-            <button type="button" id="submit">
-              search
-            </button>
-          </h5>
-        </h3>
-        <script data-cfasync="false" type="text/javascript">
-          var input;
-          var output;
+  <h1>Information Filter of Wikipedia</h1>
 
-          function setup() {
-            noCanvas();
-            input = select('#search');
-            output = select('#date');
-            var button = select('#submit');
-            button.mousePressed(search);
-          }
+  <!--<p>-->
+  <!--  <a href="http://developer.nytimes.com">NY Times Developer API</a>-->
+  <!--</p>-->
 
-          function search() {
-            var term = input.value();
-            var url = 'https://www.wikidata.org/w/api.php?action=wbgetentities&sites=enwiki&languages=en&format=json' + '&titles=' + term;
-            loadJSON(url, gotData, 'jsonp');
-          }
+  <p>
+  Name:
+    <input id="search" value="Albert Einstein"></input>
+  </p>
+  <p>
+    <button id="submit">search</button>
+  </p>
 
-          function gotData(data) {
-            var entity = data.entities[Object.keys(data.entities)]
-            if (Object.keys(data.entities)=="-1"){
-              createP('Wrong Name');
-            }else{
-              var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time
-              var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time
-              createP(input.value() + " :  " + birthdate.slice(1,11) + " to " + deathdate.slice(1,11));
-            }
-          }
-        </script>
-      </div>
 
-      <!-- <form id="foo">
-        <p>
-          <label for="StartDate">StartDate:</label>
-          <input id="Start Date" name="Start Date" type="text" value="6/28/1887">
-        </p>
-        <input id="End Date" name="End Date" type="hidden" value="">
-        <p>
-          <label for="Headline">Headline:</label>
-          <input id="Headline" name="Headline" type="text" value="Marcel Duchamp Birth">
-        </p>
-        <input id="Text" name="Text" type="hidden" value="">
-        <input id="Media" name="Media" type="hidden" value="">
-        <input id="Media Credit" name="Media Credit" type="hidden" value="">
-        <input id="Media Caption" name="Media Caption" type="hidden" value="">
-        <input id="Media Thumbnail" name="Media Thumbnail" type="hidden" value="">
-        <p id="result"></p>
-        <input type="submit" value="Send">
-      </form> -->
-
-      <!-- <script data-cfasync="false" type="text/javascript">
-        jQuery(document).ready(function($) {
-          // variable to hold request
-          var request;
-          // bind to the submit event of our form
-          $("#foo").submit(function(event) {
-            // abort any pending request
-            if (request) {
-              request.abort();
-            }
-            // setup some local variables
-            var $form = $(this);
-            // let's select and cache all the fields
-            var $inputs = $form.find("input, select, button, textarea");
-            // serialize the data in the form
-            var serializedData = $form.serialize();
-
-            // let's disable the inputs for the duration of the ajax request
-            // Note: we disable elements AFTER the form data has been serialized.
-            // Disabled form elements will not be serialized.
-            $inputs.prop("disabled", true);
-            $('#result').text('Sending data...');
-
-            // fire off the request to /form.php
-            request = $.ajax({
-              url: "https://script.google.com/macros/s/AKfycby2WvqsyQa4zO5nQeKzL7QO36S9Ed8BWcFrNBCIL9rfeK7yQ1D_/exec",
-              type: "post",
-              useDefaultXhrHeader: false,
-              data: serializedData
-            });
-
-            // callback handler that will be called on success
-            request.done(function(response, textStatus, jqXHR) {
-              // log a message to the console
-              $('#result').html('<a href="https://docs.google.com/spreadsheets/d/14mfh_3JhEhWZVWCmw1VfXCvuNAEycUrGQUrcMwI8LNY/pubhtml target="_blank">Success - see Google Sheet</a>');
-              console.log("Hooray, it worked!");
-            });
-
-            // callback handler that will be called on failure
-            request.fail(function(jqXHR, textStatus, errorThrown) {
-              // log the error to the console
-              console.error(
-                "The following error occured: " +
-                textStatus, errorThrown
-              );
-            });
-
-            // callback handler that will be called regardless
-            // if the request failed or succeeded
-            request.always(function() {
-              // reenable the inputs
-              $inputs.prop("disabled", false);
-            });
-
-            // prevent default posting of form
-            event.preventDefault();
-          });
-        });
-      </script> -->
-    </div>
-  </body>
+</body>
 
 </html>
