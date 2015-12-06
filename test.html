@@ -84,7 +84,7 @@
 
           function gotData(data) {
             var entity = data.entities[Object.keys(data.entities)]
-            if (entity == -1){
+            if (Object.keys(data.entities) == -1){
               createP('Wrong Name');
               break
             }
