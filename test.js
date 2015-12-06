@@ -35,14 +35,13 @@ function gotData(data) {
   }else{
     var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time
     var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time
-    createP(input.value() + " :  " + birthdate.slice(1,11) + " to " + deathdate.slice(1,11));
 
-    var deathdateA = (birthdeath.split("{{Death date and age|df=yes|")[1].split("}}")[0].split("|"));
-    var wordLocationXAa = (deathdateA[3] - 1800) * 5;
-    var wordLocationXAb = (deathdateA[0] - 1800) * 5;
-    var wordLocationYA = height - (deathdateA[0] - deathdateA[3]) * 5;
-    var colorA = (deathdateA[0] - deathdateA[3]) * 2.5;
-    var wordContentA = input.value() + ":" + deathdateA[3] + "-" + deathdateA[0];
+    var birthdateA = (birthdate.split('-');
+    var deathdateA = (deathdate.split('-');
+    var wordLocationXAa = (birthdateA[0] - 1800) * 5;
+    var wordLocationYA = height - (deathdateA[0] - birthdateA[0]) * 5;
+    var colorA = (deathdateA[0] - birthdateA[0]) * 2.5;
+    var wordContentA = input.value() + " :  " + birthdate.slice(1,11) + " to " + deathdate.slice(1,11)
 
     nameP.html(deathdateA[3] + "-" + deathdateA[0]);
     stroke(colorA, 0, 255, 150);
