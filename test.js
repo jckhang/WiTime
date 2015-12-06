@@ -52,5 +52,4 @@ function gotData(data) {
     fill(colorA, 0,255);
     text(wordContentA, wordLocationXAa, (wordLocationYA - 5));
     pop();
-    break;
 }
