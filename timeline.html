@@ -89,9 +89,9 @@
             }else{
               var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time
               var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time
-              var birthdateA = birthdate.split('-');
-              var deathdateA = deathdate.split('-');
-              createP(input.value() + " :  " + birthdateA[2] + " to " + deathdateA[2]);
+              var birthdateA = birthdate.slice(1,11).split('-');
+              var deathdateA = deathdate.slice(1,11).split('-');
+              createP(input.value() + " :  " + birthdateA[0] + " to " + deathdateA[0]);
             }
           }
         </script>
