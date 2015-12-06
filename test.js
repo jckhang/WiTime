@@ -43,7 +43,7 @@ function gotData(data) {
     var colorA = (deathdateA[0] - birthdateA[0]) * 2.5;
     var wordContentA = input.value() + " :  " + birthdate.slice(1,11) + " to " + deathdate.slice(1,11)
 
-    nameP.html(deathdateA[3] + "-" + deathdateA[0]);
+    nameP.html(deathdateA[0] + "-" + birthdateA[0]);
     stroke(colorA, 0, 255, 150);
     line(wordLocationXAa, wordLocationYA, wordLocationXAa, height);
     pop();
