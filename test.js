@@ -6,8 +6,9 @@ var h1;
 var canvas;
 
 function setup() {
-    canvas = createCanvas(1075,500);
-    canvas.position(20,180);
+   canvas = createCanvas(1075,500);
+   canvas.position(20,180);
+
 
   background(0);
   nameP = createP('Search births by his/her name');
@@ -19,7 +20,6 @@ function setup() {
   button.mousePressed(search);
 
 }
-
 
 function search() {
   var term = input.value();
@@ -52,4 +52,5 @@ function gotData(data) {
     fill(colorA, 0,255);
     text(wordContentA, wordLocationXAa, (wordLocationYA - 5));
     pop();
+    break
 }
