@@ -86,7 +86,7 @@
             var entity = data.entities[Object.keys(data.entities)]
             var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time
             var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time
-            createP(input.value() + " :" + birthdate[1:10] + "-" + deathdate[1:10]);
+            createP(input.value() + " :" + birthdate.slice(1,10) + "-" + deathdate.slice(1,10));
           }
         </script>
       </div>
