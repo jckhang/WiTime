@@ -86,10 +86,10 @@
             var entity = data.entities[Object.keys(data.entities)]
             if (entity == -1){
               createP('Wrong Name');
-              break
+              break;
             }
-            var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time
-            var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time
+            var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time;
+            var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time;
             createP(input.value() + " :  " + birthdate.slice(1,11) + " to " + deathdate.slice(1,11));
           }
         </script>
