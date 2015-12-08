@@ -42,5 +42,26 @@ function gotData(data) {
       useDefaultXhrHeader: false,
       data: [birthdate.slice(1,11), deathdate.slice(1,11), name, "","","","","","title",""]
     });
+    request.done(function(response, textStatus, jqXHR) {
+      // log a message to the console
+      $('#result').html('<a href="https://docs.google.com/spreadsheets/d/14mfh_3JhEhWZVWCmw1VfXCvuNAEycUrGQUrcMwI8LNY/pubhtml target="_blank">Success - see Google Sheet</a>');
+      console.log("Hooray, it worked!");
+    });
+
+    // callback handler that will be called on failure
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      // log the error to the console
+      console.error(
+        "The following error occured: " +
+        textStatus, errorThrown
+      );
+    });
+
+    // callback handler that will be called regardless
+    // if the request failed or succeeded
+    request.always(function() {
+      // reenable the inputs
+      $inputs.prop("disabled", false);
+    });
   }
 }
