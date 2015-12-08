@@ -35,14 +35,6 @@ function gotData(data) {
     var wordContentA = input.value() + " :  " + birthdate.slice(1,11) + " to " + deathdate.slice(1,11)
 
     nameP.html(birthdate.slice(1,11) + " to " + deathdate.slice(1,11));
-    stroke(colorA, 0, 255, 150);
-    line(wordLocationXAa, wordLocationYA, wordLocationXAa, height);
-    pop();
-    push();
-    noStroke();
-    fill(colorA, 0,255);
-    text(wordContentA, wordLocationXAa, (wordLocationYA - 5));
-    pop();
 
   }
 }
