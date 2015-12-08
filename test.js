@@ -33,18 +33,22 @@ function gotData(data) {
     var wordLocationYA = height - (deathdateA[0] - birthdateA[0]) * 5;
     var colorA = (deathdateA[0] - birthdateA[0]) * 2.5;
     var wordContentA = input.value() + " :  " + birthdate.slice(1,11) + " to " + deathdate.slice(1,11)
-
-    nameP.html(birthdate.slice(1,11) + " to " + deathdate.slice(1,11));
-    if (request) {
-      request.abort();
+    if deathdate="" {
+      nameP.html(birthdate.slice(1,11) + "until now");
     }
-    var request;
-    var formData = {"Start Date":birthdate.slice(1,11),"End Date":deathdate.slice(1,11),"Headline":name, "Text":name,"Media":"","Media Credit":"","Media Caption":"","Media Thumbnail":"","Type":"title","Tag":""};
-    request = $.ajax({
-      url: "https://script.google.com/macros/s/AKfycby2WvqsyQa4zO5nQeKzL7QO36S9Ed8BWcFrNBCIL9rfeK7yQ1D_/exec",
-      type: "post",
-      useDefaultXhrHeader: false,
-      data: formData
-    });
+    else {
+      nameP.html(birthdate.slice(1,11) + " to " + deathdate.slice(1,11));
+      if (request) {
+        request.abort();
+      }
+      var request;
+      var formData = {"Start Date":birthdate.slice(1,11),"End Date":deathdate.slice(1,11),"Headline":name, "Text":name,"Media":"","Media Credit":"","Media Caption":"","Media Thumbnail":"","Type":"title","Tag":""};
+      request = $.ajax({
+        url: "https://script.google.com/macros/s/AKfycby2WvqsyQa4zO5nQeKzL7QO36S9Ed8BWcFrNBCIL9rfeK7yQ1D_/exec",
+        type: "post",
+        useDefaultXhrHeader: false,
+        data: formData
+      });
+    }
   }
 }
