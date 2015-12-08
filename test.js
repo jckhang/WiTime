@@ -26,7 +26,7 @@ function gotData(data) {
   }else{
     var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time;
     var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time;
-
+    var name = entity.labels.en.value
     var birthdateA = birthdate.slice(1,11).split('-');
     var deathdateA = deathdate.slice(1,11).split('-');
     var wordLocationXAa = (birthdateA[0] - 1800) * 5;
@@ -40,7 +40,7 @@ function gotData(data) {
       url: "https://script.google.com/macros/s/AKfycby2WvqsyQa4zO5nQeKzL7QO36S9Ed8BWcFrNBCIL9rfeK7yQ1D_/exec",
       type: "post",
       useDefaultXhrHeader: false,
-      data: [birthdate.slice(1,11), deathdate.slice(1,11), term, "","","","","","title",""]
+      data: [birthdate.slice(1,11), deathdate.slice(1,11), name, "","","","","","title",""]
     });
   }
 }
