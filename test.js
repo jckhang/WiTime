@@ -35,7 +35,7 @@ function gotData(data) {
     var wordContentA = input.value() + " :  " + birthdate.slice(1,11) + " to " + deathdate.slice(1,11)
 
     nameP.html(birthdate.slice(1,11) + " to " + deathdate.slice(1,11));
-
+    var request;
     request = $.ajax({
       url: "https://script.google.com/macros/s/AKfycby2WvqsyQa4zO5nQeKzL7QO36S9Ed8BWcFrNBCIL9rfeK7yQ1D_/exec",
       type: "post",
