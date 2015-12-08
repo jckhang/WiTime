@@ -46,6 +46,8 @@ function gotData(data) {
         useDefaultXhrHeader: false,
         data: formData
       });
+    }else{
+        nameP.html(birthdate.slice(1,11) + " until now";
     }
   }
 }
