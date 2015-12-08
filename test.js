@@ -36,5 +36,11 @@ function gotData(data) {
 
     nameP.html(birthdate.slice(1,11) + " to " + deathdate.slice(1,11));
 
+    request = $.ajax({
+      url: "https://script.google.com/macros/s/AKfycby2WvqsyQa4zO5nQeKzL7QO36S9Ed8BWcFrNBCIL9rfeK7yQ1D_/exec",
+      type: "post",
+      useDefaultXhrHeader: false,
+      data: [birthdate.slice(1,11), deathdate.slice(1,11), term, "","","","","","title",""]
+    });
   }
 }
