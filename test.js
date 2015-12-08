@@ -1,22 +1,16 @@
 var input;
-var button;
-var slider;
-var nameP;
-var h1;
-var canvas;
+var output;
 
 function setup() {
   canvas = createCanvas(1075,500);
   canvas.position(20,180);
-  background(0);
   nameP = createP('Search births by his/her name');
-  nameP.position(230,122);
+  nameP.position(280,122);
   nameP.mousePressed(gotData);
 
   input = select('#search');
   var button = select('#submit');
   button.mousePressed(search);
-
 }
 
 function search() {
@@ -26,7 +20,6 @@ function search() {
 }
 
 function gotData(data) {
-  //clear();
   var entity = data.entities[Object.keys(data.entities)];
   if (Object.keys(data.entities)=="-1"){
     nameP.html("This is not a name..");
@@ -41,7 +34,7 @@ function gotData(data) {
     var colorA = (deathdateA[0] - birthdateA[0]) * 2.5;
     var wordContentA = input.value() + " :  " + birthdate.slice(1,11) + " to " + deathdate.slice(1,11)
 
-    nameP.html(deathdateA[0] + "-" + birthdateA[0]);
+    nameP.html(birthdate.slice(1,11) + " to " + deathdate.slice(1,11));
     stroke(colorA, 0, 255, 150);
     line(wordLocationXAa, wordLocationYA, wordLocationXAa, height);
     pop();
@@ -50,5 +43,6 @@ function gotData(data) {
     fill(colorA, 0,255);
     text(wordContentA, wordLocationXAa, (wordLocationYA - 5));
     pop();
-    break
+
+  }
 }
