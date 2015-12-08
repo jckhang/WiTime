@@ -24,16 +24,10 @@ function gotData(data) {
   if (Object.keys(data.entities)=="-1"){
     nameP.html("This is not a name..");
   }else{
-    var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time;
-    var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time;
-    var name = entity.labels.en.value
-    var birthdateA = birthdate.slice(1,11).split('-');
-    var deathdateA = deathdate.slice(1,11).split('-');
-    var wordLocationXAa = (birthdateA[0] - 1800) * 5;
-    var wordLocationYA = height - (deathdateA[0] - birthdateA[0]) * 5;
-    var colorA = (deathdateA[0] - birthdateA[0]) * 2.5;
-    var wordContentA = input.value() + " :  " + birthdate.slice(1,11) + " to " + deathdate.slice(1,11)
     if(entity.claims.hasOwnProperty('P570')){
+      var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time;
+      var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time;
+      var name = entity.labels.en.value
       nameP.html(birthdate.slice(1,11) + " to " + deathdate.slice(1,11));
       if (request) {
         request.abort();
@@ -47,6 +41,8 @@ function gotData(data) {
         data: formData
       });
     }else{
+        var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time;
+        var name = entity.labels.en.value
         nameP.html(birthdate.slice(1,11) + " until now";
     }
   }
