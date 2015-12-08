@@ -39,7 +39,7 @@ function gotData(data) {
       request.abort();
     }
     var request;
-    var formData = {"Start Date":birthdate.slice(1,11),"End Date":eathdate.slice(1,11),"Headline":name, "Text":name,"Media":"","Media Credit":"","Media Caption":"","Media Thumbnail":"","Type":"title","Tag":""};
+    var formData = {"Start Date":birthdate.slice(1,11),"End Date":deathdate.slice(1,11),"Headline":name, "Text":name,"Media":"","Media Credit":"","Media Caption":"","Media Thumbnail":"","Type":"title","Tag":""};
     request = $.ajax({
       url: "https://script.google.com/macros/s/AKfycby2WvqsyQa4zO5nQeKzL7QO36S9Ed8BWcFrNBCIL9rfeK7yQ1D_/exec",
       type: "post",
