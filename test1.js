@@ -24,7 +24,8 @@ function gotData(data) {
   if (Object.keys(data.entities)=="-1"){
     nameP.html("This is not a name..");
   }else{
-    if _.has(entity.claims, "P570"){
+    var claims = entity.claims;
+    if _.has(claims, "P570"){
       var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time;
       var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time;
       var name = entity.labels.en.value
