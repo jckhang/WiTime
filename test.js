@@ -12,7 +12,7 @@ function setup() {
 
   background(0);
   nameP = createP('Search births by his/her name');
-  nameP.position(220,92);
+  nameP.position(220,122);
   nameP.mousePressed(gotData);
 
   input = select('#search');
