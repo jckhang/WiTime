@@ -5,7 +5,7 @@ function setup() {
   canvas = createCanvas(1075,500);
   canvas.position(20,180);
   nameP = createP('Search births by his/her name');
-  nameP.position(230,122);
+  nameP.position(250,122);
   nameP.mousePressed(gotData);
 
   input = select('#search');
