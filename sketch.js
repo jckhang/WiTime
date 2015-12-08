@@ -24,25 +24,38 @@ function gotData(data) {
   if (Object.keys(data.entities)=="-1"){
     nameP.html("This is not a name..");
   }else{
-    var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time;
-    var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time;
+    if(entity.claims.P570){
+      var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time;
+      var deathdate = entity.claims.P570[0].mainsnak.datavalue.value.time;
+      var name = entity.labels.en.value
+      nameP.html(birthdate.slice(1,11) + " to " + deathdate.slice(1,11));
+      if (request) {
+        request.abort();
+      }
+      var request;
+      var formData = {"Start Date":birthdate.slice(1,11),"End Date":deathdate.slice(1,11),"Headline":name, "Text":name,"Media":"","Media Credit":"","Media Caption":"","Media Thumbnail":"","Type":"title","Tag":""};
+      request = $.ajax({
+        url: "https://script.google.com/macros/s/AKfycby2WvqsyQa4zO5nQeKzL7QO36S9Ed8BWcFrNBCIL9rfeK7yQ1D_/exec",
+        type: "post",
+        useDefaultXhrHeader: false,
+        data: formData
+      });
+    }else{
+      var birthdate = entity.claims.P569[0].mainsnak.datavalue.value.time;
+      var name = entity.labels.en.value
+      nameP.html(birthdate.slice(1,11) + " until now.");
+      if (request) {
+        request.abort();
+      }
+      var request;
+      var formData = {"Start Date":birthdate.slice(1,11),"End Date":"","Headline":name, "Text":name,"Media":"","Media Credit":"","Media Caption":"","Media Thumbnail":"","Type":"title","Tag":""};
+      request = $.ajax({
+        url: "https://script.google.com/macros/s/AKfycby2WvqsyQa4zO5nQeKzL7QO36S9Ed8BWcFrNBCIL9rfeK7yQ1D_/exec",
+        type: "post",
+        useDefaultXhrHeader: false,
+        data: formData
+      });
 
-    var birthdateA = birthdate.slice(1,11).split('-');
-    var deathdateA = deathdate.slice(1,11).split('-');
-    var wordLocationXAa = (birthdateA[0] - 1800) * 5;
-    var wordLocationYA = height - (deathdateA[0] - birthdateA[0]) * 5;
-    var colorA = (deathdateA[0] - birthdateA[0]) * 2.5;
-    var wordContentA = input.value() + " :  " + birthdate.slice(1,11) + " to " + deathdate.slice(1,11)
-
-    nameP.html(birthdate.slice(1,11) + " to " + deathdate.slice(1,11));
-    stroke(colorA, 0, 255, 150);
-    line(wordLocationXAa, wordLocationYA, wordLocationXAa, height);
-    pop();
-    push();
-    noStroke();
-    fill(colorA, 0,255);
-    text(wordContentA, wordLocationXAa, (wordLocationYA - 5));
-    pop();
-
+    }
   }
 }
