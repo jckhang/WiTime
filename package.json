@@ -1,0 +1,34 @@
+{
+  "name": "wikifilter",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "ejs": "~2.3.3",
+    "express": "~4.13.1",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0"
+  },
+  "description": "A demo timeline that integrated with parsed information from Wikipedia.",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jckhang/wikifilter.git"
+  },
+  "keywords": [
+    "wiki",
+    "timeline",
+    "collaborate"
+  ],
+  "author": "Yuxiang Zhang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jckhang/wikifilter/issues"
+  },
+  "homepage": "https://github.com/jckhang/wikifilter#readme"
+}
