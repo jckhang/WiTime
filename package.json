@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node server/bin/www"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -11,10 +11,17 @@
     "debug": "~2.2.0",
     "ejs": "~2.3.3",
     "express": "~4.13.1",
+    "express-session": "^1.13.0",
+    "mongoose": "^4.3.7",
     "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
+    "passport": "^0.3.0",
+    "passport-github2": "^0.1.9",
+    "passport-linkedin": "^1.0.0",
+    "passport-twitter": "^1.0.3",
+    "serve-favicon": "~2.3.0",
+    "swig": "^1.4.2"
   },
-  "description": "A demo timeline that integrated with parsed information from Wikipedia.",
+  "description": "A demo timeline app that integrated with parsed information from Wikipedia.",
   "main": "app.js",
   "repository": {
     "type": "git",
