@@ -1,9 +1,18 @@
-var express = require('express');
+
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var express = require('express')
+  , passport = require('passport')
+  , util = require('util')
+  , FacebookStrategy = require('passport-facebook').Strategy
+  , logger = require('morgan')
+  , session = require('express-session')
+  , bodyParser = require("body-parser")
+  , cookieParser = require("cookie-parser")
+  , methodOverride = require('method-override');
+var FACEBOOK_APP_ID = "--insert-facebook-app-id-here--"
+var FACEBOOK_APP_SECRET = "--insert-facebook-app-secret-here--";
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
