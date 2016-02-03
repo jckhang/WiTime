@@ -1,41 +1,61 @@
 {
-  "name": "wikifilter",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node server/bin/www"
-  },
-  "dependencies": {
-    "body-parser": "~1.13.2",
-    "cookie-parser": "~1.3.5",
-    "debug": "~2.2.0",
-    "ejs": "~2.3.3",
-    "express": "~4.13.1",
-    "express-session": "^1.13.0",
-    "mongoose": "^4.3.7",
-    "morgan": "~1.6.1",
-    "passport": "^0.3.0",
-    "passport-github2": "^0.1.9",
-    "passport-linkedin": "^1.0.0",
-    "passport-twitter": "^1.0.3",
-    "serve-favicon": "~2.3.0",
-    "swig": "^1.4.2"
-  },
-  "description": "A demo timeline app that integrated with parsed information from Wikipedia.",
-  "main": "app.js",
+  "name": "nodejs-express-mongoose-demo",
+  "description": "A demo app illustrating the usage of express, mongoose, passportjs, swig and other modules in nodejs",
+  "keywords": [
+    "express",
+    "mongoose",
+    "mongodb",
+    "passport",
+    "demo"
+  ],
+  "version": "4.0.0",
+  "private": false,
+  "author": "Madhusudhan Srinivasa <madhums8@gmail.com> (http://madhums.github.com)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jckhang/wikifilter.git"
+    "url": "https://github.com/madhums/node-express-mongoose-demo.git"
   },
-  "keywords": [
-    "wiki",
-    "timeline",
-    "collaborate"
-  ],
-  "author": "Yuxiang Zhang",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jckhang/wikifilter/issues"
+  "engines": {
+    "node": ">=5.x"
   },
-  "homepage": "https://github.com/jckhang/wikifilter#readme"
+  "scripts": {
+    "start": "NODE_ENV=development ./node_modules/.bin/nodemon server.js",
+    "debug": "NODE_ENV=development ./node_modules/.bin/nodemon --debug server.js",
+    "test": "NODE_ENV=test ./node_modules/.bin/ava --serial test/test-*.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.14.1",
+    "co-express": "~1.2.1",
+    "compression": "~1.6.0",
+    "connect-flash": "~0.1.1",
+    "connect-mongo": "~0.8.2",
+    "cookie-parser": "~1.4.0",
+    "cookie-session": "~1.2.0",
+    "csurf": "~1.8.3",
+    "express": "~4.13.3",
+    "express-session": "~1.12.1",
+    "forever": "~0.15.1",
+    "method-override": "~2.3.5",
+    "mongoose": "~4.2.7",
+    "morgan": "~1.6.1",
+    "multer": "~1.1.0",
+    "notifier": "~0.1.7",
+    "object-assign": "~4.0.1",
+    "only": "0.0.2",
+    "passport": "~0.3.2",
+    "passport-facebook": "~2.0.0",
+    "passport-github": "~1.0.0",
+    "passport-google-oauth": "~0.2.0",
+    "passport-linkedin": "~1.0.0",
+    "passport-local": "~1.0.0",
+    "passport-twitter": "~1.0.3",
+    "swig": "~1.4.2",
+    "view-helpers": "~0.1.5",
+    "winston": "~2.1.1"
+  },
+  "devDependencies": {
+    "ava": "~0.6.0",
+    "nodemon": "*",
+    "supertest": "*"
+  }
 }
