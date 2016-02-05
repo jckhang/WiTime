@@ -5,7 +5,7 @@
  */
 
 module.exports = {
-  db:  process.env.MONGOLAB_URI||'mongodb://localhost/wiki-development',
+  db:  'mongodb://heroku_k6td0nss:mvdabv47kaqgulk02kr8m52au4@ds059185.mongolab.com:59185/heroku_k6td0nss',
   facebook: {
     clientID: process.env.FACEBOOK_CLIENTID,
     clientSecret: process.env.FACEBOOK_SECRET,
