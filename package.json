@@ -1,0 +1,24 @@
+{
+  "name": "wikifilter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jckhang/wikifilter.git"
+  },
+  "keywords": [
+    "Wiki",
+    "Node.js",
+    "heroku"
+  ],
+  "author": "Yuxiang Zhang, He Ying",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jckhang/wikifilter/issues"
+  },
+  "homepage": "https://github.com/jckhang/wikifilter#readme"
+}
