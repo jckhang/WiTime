@@ -37,7 +37,7 @@ var insertDocument = function(db, name, birth, death, callback) {
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/peoples', function(req, res, next) {
-    console.log(req.body.name);
+    console.log('Quested');
     var name = req.body.name,
         birth = req.body.birth,
         death = req.body.death;
@@ -49,6 +49,21 @@ app.post('/peoples', function(req, res, next) {
         });
     });
 });
+
+app.get('/draw', function(req, res, next) {
+    MongoClient.connect(url, function(err, db) {
+        assert.equal(null, err);
+        var cursor = db.collection('peoples').aggregate(
+            [
+                { "$group": { "_id": { name: "$name", birth: "$birth", death: "$death" } } }
+            ]
+        )
+        cursor.get(function(err, results) {
+            res.json(results);
+            db.close();
+        });
+    })
+})
 routes(app);
 var port = process.env.PORT || 8080;
 app.listen(port, function() {

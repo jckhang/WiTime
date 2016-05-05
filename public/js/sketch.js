@@ -5,10 +5,51 @@ var nameP;
 var h1;
 var canvas;
 
+function drawPeople() {
+    $.getJSON("/draw")
+        .done(function(data) {
+            data.forEach(function(element, index) {
+                let deathYear = element['_id']['death'],
+                    birthYear = element['_id']['birth'],
+                    name = element['_id']['name'];
+
+                if (element['_id']['death'] < 2016) {
+                    let color = (deathYear - birthYear) * 2.5
+                    let wordLocationXa = (birthYear - 1800) * 5;
+                    let wordLocationXb = (deathYear - 1800) * 5;
+                    let wordLocationY = height - (deathYear - birthYear) * 5;
+                    let wordContent = name + ":" + birthYear + "-" + deathYear;
+                    stroke(color, 0, 255, 150);
+                    line(wordLocationXa, wordLocationY, wordLocationXa, height);
+                    pop();
+                    push();
+                    noStroke();
+                    fill(color, 0, 255);
+                    text(wordContent, wordLocationXa, (wordLocationY - 5));
+                    pop();
+                } else {
+                    let color = (deathYear - birthYear) * 2.5
+                    let wordLocationXa = (birthYear - 1800) * 5;
+                    let wordLocationXb = (deathYear - 1800) * 5;
+                    let wordLocationY = height - (deathYear - birthYear) * 5;
+                    let wordContent = name + ":" + birthYear + "-" + deathYear;
+
+                    stroke(color, 255, 0, 150);
+                    line(wordLocationXa, wordLocationY, wordLocationXa, height);
+                    pop();
+                    push();
+                    noStroke();
+                    fill(color, 255, 0);
+                    text(wordContent, wordLocationXa, (wordLocationY - 5));
+                    pop();
+                };
+            });
+        });
+}
+
 function setup() {
     canvas = createCanvas(1075, 500);
     canvas.position(20, 180);
-
 
     background(0);
     nameP = createP('Search births by his/her name');
@@ -95,7 +136,6 @@ function gotData(data) {
             let wordLocationXb = (deathYear - 1800) * 5;
             let wordLocationY = height - (deathYear - birthYear) * 5;
             let wordContent = input.value() + ":" + birthYear + "-" + deathYear;
-            console.log(birthYear)
             nameP.html(birthYear + "-" + deathYear);
             stroke(color, 255, 0, 150);
             line(wordLocationXa, wordLocationY, wordLocationXa, height);
@@ -105,7 +145,16 @@ function gotData(data) {
             fill(color, 255, 0);
             text(wordContent, wordLocationXa, (wordLocationY - 5));
             pop();
+            $.ajax({
+                method: "POST",
+                url: '/peoples',
+                data: { 'name': name, 'birth': birthYear, 'death': deathYear },
+                dataType: 'json'
+            });
 
         }
     }
 }
+
+
+drawPeople();
