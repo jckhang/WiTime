@@ -1,4 +1,3 @@
-'use strict';
 var input;
 var button;
 var slider;
@@ -10,16 +9,16 @@ function drawPeople() {
     $.getJSON("/draw")
         .done(function(data) {
             data.forEach(function(element, index) {
-                let deathYear = element['_id']['death'],
+                var deathYear = element['_id']['death'],
                     birthYear = element['_id']['birth'],
                     name = element['_id']['name'];
 
                 if (element['_id']['death'] < 2016) {
-                    let color = (deathYear - birthYear) * 2.5
-                    let wordLocationXa = (birthYear - 1800) * 5;
-                    let wordLocationXb = (deathYear - 1800) * 5;
-                    let wordLocationY = height - (deathYear - birthYear) * 5;
-                    let wordContent = name + ":" + birthYear + "-" + deathYear;
+                    var color = (deathYear - birthYear) * 2.5
+                    var wordLocationXa = (birthYear - 1800) * 5;
+                    var wordLocationXb = (deathYear - 1800) * 5;
+                    var wordLocationY = height - (deathYear - birthYear) * 5;
+                    var wordContent = name + ":" + birthYear + "-" + deathYear;
                     stroke(color, 0, 255, 150);
                     line(wordLocationXa, wordLocationY, wordLocationXa, height);
                     pop();
@@ -29,11 +28,11 @@ function drawPeople() {
                     text(wordContent, wordLocationXa, (wordLocationY - 5));
                     pop();
                 } else {
-                    let color = (deathYear - birthYear) * 2.5
-                    let wordLocationXa = (birthYear - 1800) * 5;
-                    let wordLocationXb = (deathYear - 1800) * 5;
-                    let wordLocationY = height - (deathYear - birthYear) * 5;
-                    let wordContent = name + ":" + birthYear + "-" + deathYear;
+                    var color = (deathYear - birthYear) * 2.5
+                    var wordLocationXa = (birthYear - 1800) * 5;
+                    var wordLocationXb = (deathYear - 1800) * 5;
+                    var wordLocationY = height - (deathYear - birthYear) * 5;
+                    var wordContent = name + ":" + birthYear + "-" + deathYear;
 
                     stroke(color, 255, 0, 150);
                     line(wordLocationXa, wordLocationY, wordLocationXa, height);
@@ -91,13 +90,13 @@ function gotData(data) {
                 useDefaultXhrHeader: false,
                 data: formData
             });
-            let birthYear = birthdate.slice(1, 5)
-            let deathYear = deathdate.slice(1, 5)
-            let color = (deathYear - birthYear) * 2.5
-            let wordLocationXa = (birthYear - 1800) * 5;
-            let wordLocationXb = (deathYear - 1800) * 5;
-            let wordLocationY = height - (deathYear - birthYear) * 5;
-            let wordContent = input.value() + ":" + birthYear + "-" + deathYear;
+            var birthYear = birthdate.slice(1, 5)
+            var deathYear = deathdate.slice(1, 5)
+            var color = (deathYear - birthYear) * 2.5
+            var wordLocationXa = (birthYear - 1800) * 5;
+            var wordLocationXb = (deathYear - 1800) * 5;
+            var wordLocationY = height - (deathYear - birthYear) * 5;
+            var wordContent = input.value() + ":" + birthYear + "-" + deathYear;
 
             nameP.html(birthYear + "-" + deathYear);
             stroke(color, 0, 255, 150);
@@ -130,13 +129,13 @@ function gotData(data) {
                 useDefaultXhrHeader: false,
                 data: formData
             });
-            let birthYear = birthdate.slice(1, 5)
-            let deathYear = 2016
-            let color = (deathYear - birthYear) * 2.5
-            let wordLocationXa = (birthYear - 1800) * 5;
-            let wordLocationXb = (deathYear - 1800) * 5;
-            let wordLocationY = height - (deathYear - birthYear) * 5;
-            let wordContent = input.value() + ":" + birthYear + "-" + deathYear;
+            var birthYear = birthdate.slice(1, 5)
+            var deathYear = 2016
+            var color = (deathYear - birthYear) * 2.5
+            var wordLocationXa = (birthYear - 1800) * 5;
+            var wordLocationXb = (deathYear - 1800) * 5;
+            var wordLocationY = height - (deathYear - birthYear) * 5;
+            var wordContent = input.value() + ":" + birthYear + "-" + deathYear;
             nameP.html(birthYear + "-" + deathYear);
             stroke(color, 255, 0, 150);
             line(wordLocationXa, wordLocationY, wordLocationXa, height);
