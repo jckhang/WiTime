@@ -4,7 +4,7 @@ var slider;
 var nameP;
 var h1;
 var canvas;
-var city = 'NaN';
+
 
 function geoFindMe() {
 
@@ -14,22 +14,17 @@ function geoFindMe() {
     }
 
     function success(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
         // var latitude = 39.92363;
         // var longitude = 116.360698;
-        var GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + '%2C' + longitude + '&language=en';
-
-        $.getJSON(GEOCODING).done(function(location) {
-            city = location.results[0].address_components[4].short_name;
-            console.log(city);
-        })
-
 
     };
 
     function error() {
         console.log("Unable to retrieve your location");
+        latitude = 'NaN';
+        longitude = 'NaN';
     };
 
     console.log("Locating…");
@@ -143,7 +138,13 @@ function gotData(data) {
             $.ajax({
                 method: "POST",
                 url: '/peoples',
-                data: { 'name': name, 'birth': birthYear, 'death': deathYear, 'city': window.city },
+                data: {
+                    'name': name,
+                    'birth': birthYear,
+                    'death': deathYear,
+                    'latitude': window.latitude,
+                    'longitude': window.longitude
+                },
                 dataType: 'json'
             });
 
@@ -181,7 +182,13 @@ function gotData(data) {
             $.ajax({
                 method: "POST",
                 url: '/peoples',
-                data: { 'name': name, 'birth': birthYear, 'death': deathYear },
+                data: {
+                    'name': name,
+                    'birth': birthYear,
+                    'death': deathYear,
+                    'latitude': window.latitude,
+                    'longitude': window.longitude
+                },
                 dataType: 'json'
             });
 
