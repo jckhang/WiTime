@@ -25,7 +25,7 @@ function geoFindMe() {
     };
 
     function error() {
-        console.log("Unable to retrieve your location");
+        alert("Unable to retrieve your location");
     };
 
     console.log("Locating…");
