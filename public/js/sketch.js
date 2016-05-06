@@ -7,7 +7,6 @@ var canvas;
 var city = 'NaN';
 
 function geoFindMe() {
-    
 
     if (!navigator.geolocation) {
         output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
@@ -22,17 +21,19 @@ function geoFindMe() {
         var GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + '%2C' + longitude + '&language=en';
 
         $.getJSON(GEOCODING).done(function(location) {
-            city = location.results[0].address_components[4].short_name;    
+            city = location.results[0].address_components[4].short_name;
             console.log(city);
         })
+
 
     };
 
     function error() {
         console.log("Unable to retrieve your location");
     };
-    
+
     console.log("Locating…");
+
 
     navigator.geolocation.getCurrentPosition(success, error);
 }
@@ -142,7 +143,7 @@ function gotData(data) {
             $.ajax({
                 method: "POST",
                 url: '/peoples',
-                data: { 'name': name, 'birth': birthYear, 'death': deathYear, 'city':window.city},
+                data: { 'name': name, 'birth': birthYear, 'death': deathYear, 'city': window.city },
                 dataType: 'json'
             });
 
