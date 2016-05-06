@@ -4,9 +4,10 @@ var slider;
 var nameP;
 var h1;
 var canvas;
+var city = 'NaN';
 
 function geoFindMe() {
-    var output = document.getElementById("out");
+    
 
     if (!navigator.geolocation) {
         output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
@@ -16,10 +17,13 @@ function geoFindMe() {
     function success(position) {
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
-        var GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + '%2C' + position.coords.longitude + '&language=en';
+        // var latitude = 39.92363;
+        // var longitude = 116.360698;
+        var GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + '%2C' + longitude + '&language=en';
 
         $.getJSON(GEOCODING).done(function(location) {
-            alert(location.results[0].address_components[4].long_name)
+            city = location.results[0].address_components[4].short_name;    
+            console.log(city);
         })
 
     };
@@ -27,7 +31,7 @@ function geoFindMe() {
     function error() {
         console.log("Unable to retrieve your location");
     };
-
+    
     console.log("Locating…");
 
     navigator.geolocation.getCurrentPosition(success, error);
@@ -95,7 +99,6 @@ function search() {
     var term = input.value();
     var url = 'https://www.wikidata.org/w/api.php?action=wbgetentities&sites=enwiki&languages=en&format=json' + '&titles=' + term;
     loadJSON(url, gotData, 'jsonp');
-    geoFindMe()
 }
 
 function gotData(data) {
@@ -139,7 +142,7 @@ function gotData(data) {
             $.ajax({
                 method: "POST",
                 url: '/peoples',
-                data: { 'name': name, 'birth': birthYear, 'death': deathYear },
+                data: { 'name': name, 'birth': birthYear, 'death': deathYear, 'city':window.city},
                 dataType: 'json'
             });
 
@@ -184,6 +187,5 @@ function gotData(data) {
         }
     }
 }
-
-
+geoFindMe();
 drawPeople();

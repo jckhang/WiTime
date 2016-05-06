@@ -23,11 +23,12 @@ swig.setDefaults({ cache: false });
 
 let url = 'mongodb://user:123@ds059185.mlab.com:59185/heroku_k6td0nss';
 
-var insertDocument = function(db, name, birth, death, callback) {
+var insertDocument = function(db, name, birth, death, city, callback) {
     db.collection('peoples').insertOne({
         "name": name,
         "birth": birth,
-        "death": death
+        "death": death,
+        "city": city
     }, function(err, result) {
         assert.equal(err, null);
         console.log("Inserted a document into the peolpes collection.");
@@ -40,13 +41,15 @@ app.post('/peoples', function(req, res, next) {
     console.log('Quested');
     var name = req.body.name,
         birth = req.body.birth,
-        death = req.body.death;
+        death = req.body.death,
+        city = req.body.city;
     console.log(name)
     MongoClient.connect(url, function(err, db) {
         assert.equal(null, err);
-        insertDocument(db, name, birth, death, function() {
-            db.close();
-        });
+        insertDocument(db, name, birth, death, city,
+            function() {
+                db.close();
+            });
     });
 });
 
