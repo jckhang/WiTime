@@ -6,31 +6,28 @@ var h1;
 var canvas;
 
 function geoFindMe() {
-    var output = document.getElementById("out");
+  var output = document.getElementById("out");
 
-    if (!navigator.geolocation) {
-        output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-        return;
-    }
+  if (!navigator.geolocation){
+    output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+    return;
+  }
 
-    function success(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-        var GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + '%2C' + position.coords.longitude + '&language=en';
+  function success(position) {
+    var latitude  = position.coords.latitude;
+    var longitude = position.coords.longitude;
 
-        $.getJSON(GEOCODING).done(function(location) {
-            alert(location.results[0].address_components[4].long_name)
-        })
+    alert('Latitude is ' + latitude + '° Longitude is ' + longitude + '°');
 
-    };
+  };
 
-    function error() {
-        alert("Unable to retrieve your location");
-    };
+  function error() {
+    alert("Unable to retrieve your location");
+  };
 
-    console.log("Locating…");
+  console.log("Locating…");
 
-    navigator.geolocation.getCurrentPosition(success, error);
+  navigator.geolocation.getCurrentPosition(success, error);
 }
 
 function drawPeople() {
