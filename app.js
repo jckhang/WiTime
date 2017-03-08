@@ -1,18 +1,17 @@
 'use strict';
-const express = require("express"),
-    path = require('path'),
-    swig = require('swig'),
-    MongoClient = require('mongodb').MongoClient,
-    ObjectId = require('mongodb').ObjectID,
-    assert = require('assert'),
-    bodyParser = require('body-parser'),
-    GoogleMapsAPI = require('googlemaps');
+const express = require("express");
+const path = require('path');
+const swig = require('swig');
+const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectID;
+const assert = require('assert');
+const bodyParser = require('body-parser');
+
 
 
 const app = express();
 
 const routes = require('./routes/index.js');
-// const api = require('./api/100nyu.js');
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, '/public/css')));
@@ -23,22 +22,14 @@ app.engine('html', swig.renderFile); // how to render html templates
 swig.setDefaults({ cache: false });
 
 
-var publicConfig = {
-    key: 'AIzaSyDLUP1JCv3GRrsmfifX8dWY3jfQKtUSiFQ',
-    stagger_time: 1000, // for elevationPath
-    encode_polylines: false,
-    secure: true // use https
-};
-var gmAPI = new GoogleMapsAPI(publicConfig);
 
 let url = 'mongodb://user:123@ds059185.mlab.com:59185/heroku_k6td0nss';
 
-var insertDocument = function(db, name, birth, death, city, callback) {
+var insertDocument = function(db, name, birth, death, callback) {
     db.collection('peoples').insertOne({
         "name": name,
         "birth": birth,
-        "death": death,
-        "city": city
+        "death": death
     }, function(err, result) {
         assert.equal(err, null);
         console.log("Inserted a document into the peolpes collection.");
@@ -51,26 +42,11 @@ app.post('/peoples', function(req, res, next) {
     console.log('Quested');
     var name = req.body.name,
         birth = req.body.birth,
-        death = req.body.death,
-        latitude = req.body.latitude,
-        longitude = req.body.longitude,
-        latlon = latitude+","+longitude,
-        city;
-    console.log(latlon);
-    var reverseGeocodeParams = {
-        "latlng": latlon,
-        "result_type": "postal_code",
-        "language": "en",
-        "location_type": "APPROXIMATE"
-    };
+        death = req.body.death;
 
-    gmAPI.reverseGeocode(reverseGeocodeParams, function(err, result) {
-        console.log(result);    
-        city = result.results[0].address_components.slice(-2)[0].long_name;
-    });
     MongoClient.connect(url, function(err, db) {
         assert.equal(null, err);
-        insertDocument(db, name, birth, death, city,
+        insertDocument(db, name, birth, death,
             function() {
                 db.close();
             });
